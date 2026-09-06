@@ -1,1 +1,0 @@
-import{I as e}from"./index-CQaYRTk7.js";import{t}from"./niche-page-B41YzGzM.js";var n=e();function r(){return(0,n.jsx)(t,{slug:`geo-b2b`})}export{r as component};
