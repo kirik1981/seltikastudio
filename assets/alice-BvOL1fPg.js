@@ -1,0 +1,1 @@
+import{I as e,d as t,r as n}from"./index-VH2S3-PT.js";import{t as r}from"./knowledge-page-5gxdypiw.js";var i=e();function a(){return(0,i.jsx)(r,{doc:n,graph:t({path:n.path,title:n.title,description:n.description,crumbs:[{name:`Главная`,path:`/`},{name:`Алиса`,path:`/alice`}]})})}export{a as component};
