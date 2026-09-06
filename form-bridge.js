@@ -166,3 +166,82 @@
     return origFetch.apply(this, arguments);
   };
 })();
+
+/* Chrome/Blink: mix-blend grain kills animations; SVG setAttribute often does not repaint. */
+(function () {
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var style = document.createElement("style");
+  style.setAttribute("data-seltika-motion", "1");
+  style.textContent =
+    ".grain{mix-blend-mode:normal!important;opacity:.05!important}" +
+    ".logo-float,.orbit-badge-spin,.marquee,.orbit-ring,.live-dot,.caret,.radar-sweep{" +
+    "-webkit-animation-play-state:running!important;animation-play-state:running!important}" +
+    ".logo-float{-webkit-animation:logo-float 7s ease-in-out infinite;animation:logo-float 7s ease-in-out infinite;will-change:transform}" +
+    ".orbit-badge-spin{-webkit-animation:orbit-spin 22s linear infinite;animation:orbit-spin 22s linear infinite;will-change:transform}" +
+    ".marquee{-webkit-animation:marquee-slide 28s linear infinite;animation:marquee-slide 28s linear infinite;will-change:transform}" +
+    ".orbit-ring{-webkit-animation:orbit-spin 48s linear infinite;animation:orbit-spin 48s linear infinite}" +
+    ".eg-html-dot{position:absolute;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;pointer-events:none;z-index:2;will-change:left,top}";
+  document.documentElement.appendChild(style);
+
+  function setCxCy(el, x, y) {
+    try {
+      el.cx.baseVal.value = x;
+      el.cy.baseVal.value = y;
+    } catch (e) {
+      el.setAttribute("cx", String(x));
+      el.setAttribute("cy", String(y));
+    }
+  }
+
+  function bootGraph() {
+    var svg = document.querySelector("#graph svg");
+    if (!svg || svg.getAttribute("data-seltika-motion") === "on") return false;
+    var groups = svg.querySelectorAll("g");
+    var spokes = [];
+    for (var i = 0; i < groups.length; i++) {
+      var line = groups[i].querySelector("line");
+      var dot = groups[i].querySelector("circle");
+      if (!line || !dot) continue;
+      var x1 = parseFloat(line.getAttribute("x1"));
+      var y1 = parseFloat(line.getAttribute("y1"));
+      var x2 = parseFloat(line.getAttribute("x2"));
+      var y2 = parseFloat(line.getAttribute("y2"));
+      if (isNaN(x1) || isNaN(x2)) continue;
+      var clone = dot.cloneNode(true);
+      dot.parentNode.replaceChild(clone, dot);
+      spokes.push({ el: clone, x1: x1, y1: y1, x2: x2, y2: y2, dur: 3600 + spokes.length * 350 });
+    }
+    if (!spokes.length) return false;
+    svg.setAttribute("data-seltika-motion", "on");
+    var t0 = performance.now();
+    function tick(now) {
+      var t = now - t0;
+      for (var i = 0; i < spokes.length; i++) {
+        var s = spokes[i];
+        var p = (t / s.dur) % 1;
+        var k = p < 0.5 ? p * 2 : 2 - p * 2;
+        setCxCy(s.el, s.x1 + (s.x2 - s.x1) * k, s.y1 + (s.y2 - s.y1) * k);
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    return true;
+  }
+
+  function start() {
+    if (!bootGraph()) {
+      var n = 0;
+      var id = setInterval(function () {
+        n += 1;
+        if (bootGraph() || n > 20) clearInterval(id);
+      }, 400);
+    }
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
+  window.addEventListener("load", function () {
+    setTimeout(start, 600);
+  });
+})();
