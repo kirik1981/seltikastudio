@@ -4,6 +4,7 @@
   "name": "SELTIKA STUDIO",
   "url": "https://seltikastudio.ru",
   "telephone": "+7 903 343-40-07",
+  "email": "hello@seltikastudio.ru",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Казань",
