@@ -1,0 +1,1 @@
+import{P as e}from"./index-sNJLfh0L.js";import{t}from"./niche-page-DilBvxxf.js";var n=e();function r(){return(0,n.jsx)(t,{slug:`local`})}export{r as component};
