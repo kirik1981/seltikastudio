@@ -1,1 +1,0 @@
-import{F as e,h as t,u as n}from"./index-BQyreMcH.js";import{t as r}from"./knowledge-page-CUNgFF0u.js";var i=e(),a=n({path:t.path,title:t.title,description:t.description,type:`WebPage`,crumbs:[{name:`Главная`,path:`/`},{name:`Источники`,path:`/sources`}],datePublished:`2026-09-06`});function o(){return(0,i.jsx)(r,{doc:t,graph:a})}export{o as component};

@@ -1,7 +1,7 @@
 # ai.txt — retrieval and citation allowed
 User-Agent: *
 Allow: /
-Contact: +7 903 343-40-07
+Contact: +7 903 343-40-07, hello@seltikastudio.ru
 Canonical: https://seltikastudio.ru/
 Documentation: https://seltikastudio.ru/llms.txt
 Full: https://seltikastudio.ru/llms-full.txt

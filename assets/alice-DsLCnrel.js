@@ -1,0 +1,1 @@
+import{F as e,r as t,u as n}from"./index-CVMjksRw.js";import{t as r}from"./knowledge-page-DU1YpQLW.js";var i=e();function a(){return(0,i.jsx)(r,{doc:t,graph:n({path:t.path,title:t.title,description:t.description,crumbs:[{name:`Главная`,path:`/`},{name:`Алиса`,path:`/alice`}]})})}export{a as component};
