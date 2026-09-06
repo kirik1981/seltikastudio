@@ -1,0 +1,1 @@
+import{I as e,d as t,r as n}from"./index-CiAiTEFL.js";import{t as r}from"./knowledge-page-DO2TbduR.js";var i=e();function a(){return(0,i.jsx)(r,{doc:n,graph:t({path:n.path,title:n.title,description:n.description,crumbs:[{name:`Главная`,path:`/`},{name:`Алиса`,path:`/alice`}]})})}export{a as component};
