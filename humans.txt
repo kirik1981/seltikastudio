@@ -1,6 +1,7 @@
 /* TEAM */
 Studio: SELTIKA STUDIO
-Contact: 
+City: Kazan, Russia
+Contact: +7 967 460-71-78
 Site: https://seltikastudio.ru
 
 /* SITE */
@@ -8,3 +9,4 @@ Standards: HTML5, Schema.org, llms.txt
 Language: ru
 Doctype: HTML5
 Components: GEO, AEO, AI visibility
+Not: OOO SELTIKA warehouse, Select Studio fashion, game studio
