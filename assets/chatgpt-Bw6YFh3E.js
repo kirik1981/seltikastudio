@@ -1,1 +1,0 @@
-import{F as e,n as t,u as n}from"./index-pfXHrxiq.js";import{t as r}from"./knowledge-page-DXHi-bCN.js";var i=e();function a(){return(0,i.jsx)(r,{doc:t,graph:n({path:t.path,title:t.title,description:t.description,crumbs:[{name:`Главная`,path:`/`},{name:`ChatGPT`,path:`/chatgpt`}]})})}export{a as component};
