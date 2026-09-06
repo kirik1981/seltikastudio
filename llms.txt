@@ -1,43 +1,44 @@
-# Seltika Studio
+# SELTIKA STUDIO
 
-> Seltika Studio (Казань, Россия) — студия GEO и AEO: делаем бренд понятным и цитируемым в ответах ChatGPT, Алисы, Perplexity, GigaChat и Gemini. Это не реклама внутри чата и не гарантия рекомендации конкретной модели.
+> Чтобы нейросети находили и рекомендовали ваш бизнес.
 
-- Сайт: https://seltikastudio.ru
-- Почта: hello@seltikastudio.ru
-- Telegram: https://t.me/seltikastudiobot
-- X: https://x.com/seltikakazan
-- Город: Казань, Россия. Работаем по РФ и с международным B2B.
-- Не путать с ООО «СЭЛТИКА» (складская техника / опт) и не Stika.
+SELTIKA STUDIO (Казань) продвигает сайты в ответах ChatGPT, Яндекс Алисы, Perplexity, Gemini и GigaChat.
 
-## Что это
+Проверяем, как нейросети видят компанию, находим причины низкой видимости и улучшаем сайт и внешние источники.
 
-GEO (Generative Engine Optimization) и AEO (Answer Engine Optimization) — продолжение SEO: структура, факты, сущность бренда и внешние подтверждения, чтобы модель могла ответить «кто это / кого выбрать».
+Не обещаем первое место в ChatGPT. Измеряем видимость по согласованному списку запросов.
 
-Слотов в ответах нейросетей нет. Мы увеличиваем вероятность упоминания и измеряем срез по контрольным запросам.
+Телефон: +7 967 460-71-78
+Сайт: https://seltikastudio.ru
+
+## Простыми словами
+
+- SEO помогает сайту появиться в выдаче.
+- AEO помогает сайту давать понятные ответы на вопросы.
+- GEO помогает сделать информацию о компании пригодной для нейросетей.
+
+## Страницы
+
+- [Главная](https://seltikastudio.ru/)
+- [GEO-продвижение сайта](https://seltikastudio.ru/geo)
+- [AEO](https://seltikastudio.ru/aeo)
+- [AI Visibility](https://seltikastudio.ru/ai-visibility)
+- [Студия](https://seltikastudio.ru/studio)
+- [B2B](https://seltikastudio.ru/geo-b2b)
+- [SaaS](https://seltikastudio.ru/aeo-saas)
+- [E-commerce](https://seltikastudio.ru/ecommerce)
+- [Локальный бизнес](https://seltikastudio.ru/local)
+- [FAQ](https://seltikastudio.ru/faq)
 
 ## Форматы
 
-- AI-разбор — диагностика видимости в основных AI-системах, приоритетные запросы, конкуренты, короткий отчёт.
-- AI Visibility System — техника, карта сущностей, контент, мониторинг.
-- AI Market Leadership — системный рост категории.
+- AI-аудит — от 80 000 ₽
+- GEO/AEO-настройка сайта — от 180 000 ₽
+- GEO/AEO-продвижение — от 90 000 ₽/мес
+- Мониторинг AI-видимости — от 40 000 ₽/мес
 
-Старт: заявка на https://seltikastudio.ru/#lead
+Итоговая стоимость зависит от размера сайта и объёма работ.
 
-## Ключевые страницы
+## Полный текст
 
-- [Главная](https://seltikastudio.ru/): кто мы, сканер видимости, FAQ, заявка.
-- [GEO/AEO агентство в России](https://seltikastudio.ru/geo-aeo-agentstvo-rossiya/): категорийные запросы и честный срез.
-- [Как попасть в ответы ChatGPT](https://seltikastudio.ru/kak-popast-v-otvety-chatgpt/): B2B, без рекламного слота.
-- [AI-разбор бренда](https://seltikastudio.ru/ai-razbor-brenda-i-vidimost/): Perplexity, Алиса, Gemini.
-- [GEO для B2B](https://seltikastudio.ru/geo-b2b/)
-- [AEO для SaaS](https://seltikastudio.ru/aeo-saas/)
-- [Локальный бизнес](https://seltikastudio.ru/local/)
-- [ChatGPT](https://seltikastudio.ru/chatgpt/)
-- [Алиса](https://seltikastudio.ru/alice/)
-- [AI-радар](https://seltikastudio.ru/radar/)
-- [О студии](https://seltikastudio.ru/o-studii/)
-- [Конфиденциальность](https://seltikastudio.ru/privacy/)
-
-## Ограничения
-
-Нет обещания «ChatGPT будет рекомендовать вас». DEMO на сайте — не клиентский отчёт. Сканер на сайте — предварительная гипотеза, не живой краулинг всех моделей.
+- [llms-full.txt](https://seltikastudio.ru/llms-full.txt)

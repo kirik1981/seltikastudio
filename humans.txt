@@ -1,0 +1,10 @@
+/* TEAM */
+Studio: SELTIKA STUDIO
+Contact: 
+Site: https://seltikastudio.ru
+
+/* SITE */
+Standards: HTML5, Schema.org, llms.txt
+Language: ru
+Doctype: HTML5
+Components: GEO, AEO, AI visibility

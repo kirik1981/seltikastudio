@@ -1,8 +1,9 @@
+# SELTIKA STUDIO — AI retrieval is intended.
+# GPTBot, PerplexityBot, Google-Extended, Yandex and others are welcome.
+
 User-agent: *
 Allow: /
-Sitemap: https://seltikastudio.ru/sitemap.xml
 
-# AI crawlers — явный доступ к публичным страницам
 User-agent: GPTBot
 Allow: /
 
@@ -15,10 +16,7 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-User-agent: Claude-User
-Allow: /
-
-User-agent: Anthropic-AI
+User-agent: anthropic-ai
 Allow: /
 
 User-agent: PerplexityBot
@@ -30,7 +28,13 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-News
+Allow: /
+
 User-agent: Google-CloudVertexBot
+Allow: /
+
+User-agent: Gemini-Deep-Research
 Allow: /
 
 User-agent: Applebot
@@ -45,13 +49,19 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-User-agent: Amazonbot
-Allow: /
-
 User-agent: meta-externalagent
 Allow: /
 
 User-agent: FacebookBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: DuckAssistBot
 Allow: /
 
 User-agent: Yandex
@@ -59,3 +69,9 @@ Allow: /
 
 User-agent: YandexBot
 Allow: /
+
+User-agent: YandexNews
+Allow: /
+
+Sitemap: https://seltikastudio.ru/sitemap.xml
+Host: https://seltikastudio.ru

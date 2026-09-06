@@ -1,0 +1,1 @@
+import{P as e,g as t,l as n}from"./index-CCTZ0TvT.js";import{t as r}from"./knowledge-page-BIfb-Cxu.js";var i=e();function a(){return(0,i.jsx)(r,{doc:t,graph:n})}export{a as component};
