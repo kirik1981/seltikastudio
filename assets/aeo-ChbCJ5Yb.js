@@ -1,0 +1,1 @@
+import{F as e,f as t,i as n}from"./index-pfXHrxiq.js";import{t as r}from"./knowledge-page-DXHi-bCN.js";var i=e();function a(){return(0,i.jsx)(r,{doc:t,graph:n})}export{a as component};
