@@ -1,1 +1,0 @@
-import{I as e,a as t,p as n}from"./index-Bi9LGBlE.js";import{t as r}from"./knowledge-page-CZS42kk_.js";var i=e();function a(){return(0,i.jsx)(r,{doc:n,graph:t})}export{a as component};

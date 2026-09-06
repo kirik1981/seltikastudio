@@ -1,1 +1,0 @@
-import{I as e}from"./index-Bi9LGBlE.js";import{t}from"./niche-page-BGwe9-wA.js";var n=e();function r(){return(0,n.jsx)(t,{slug:`ecommerce`})}export{r as component};
