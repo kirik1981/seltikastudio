@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Коммерческое предложение — SELTIKA STUDIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Onest:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070a0f;
+      --fg: #f2f5f7;
+      --muted: #8c98a8;
+      --faint: #5c6878;
+      --card: #101722;
+      --line: rgb(255 255 255 / 0.12);
+      --blue: #22b8ff;
+      --amber: #ff8a24;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Manrope, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { font-family: Onest, Manrope, sans-serif; letter-spacing: -0.03em; line-height: 1.12; text-wrap: balance; margin: 0; }
+    p { margin: 0; text-wrap: pretty; }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 16mm 18mm 18mm;
+      position: relative;
+      page-break-after: always;
+      break-after: page;
+    }
+    .page:last-child { page-break-after: auto; break-after: auto; }
+    .kicker {
+      font-family: Onest, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hair { height: 1px; border: 0; margin: 18px 0; background: linear-gradient(90deg, transparent, rgb(34 184 255 / 0.55) 22%, rgb(255 138 36 / 0.7) 78%, transparent); }
+    .foot {
+      position: absolute;
+      left: 18mm; right: 18mm; bottom: 12mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--faint);
+      font-family: "IBM Plex Mono", monospace;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .card.hi { border-color: rgb(34 184 255 / 0.45); }
+    .num { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--amber); }
+    ul { margin: 8px 0 0; padding: 0; list-style: none; }
+    li { position: relative; padding-left: 14px; margin: 6px 0; font-size: 13.5px; color: var(--muted); }
+    li::before { content: ""; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+    .price { font-family: Onest, sans-serif; font-size: 22px; font-weight: 600; }
+    a { color: var(--blue); text-decoration: none; }
+    @page { size: A4; margin: 0; }
+    @media print {
+      html, body { background: var(--bg); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { min-height: 297mm; }
+    }
+    @media screen {
+      body { padding: 24px 0; }
+      .page {
+        margin: 0 auto 24px;
+        box-shadow: 0 24px 80px rgb(0 0 0 / 0.45);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="page">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+    <div>
+      <p class="kicker">Казань · seltikastudio.ru</p>
+      <p style="margin-top:10px;font-family:Onest,sans-serif;font-weight:700;letter-spacing:0.18em;">SELTIKA</p>
+      <p style="font-size:11px;letter-spacing:0.32em;color:var(--muted);margin-top:4px;">STUDIO</p>
+    </div>
+    <img src="/logo-hero.webp" alt="SELTIKA" style="height:96px;width:auto;" />
+  </div>
+  <hr class="hair" />
+  <p class="kicker">Коммерческое предложение</p>
+  <h1 style="margin-top:16px;font-size:42px;max-width:16ch;">Чтобы нейросети находили и рекомендовали ваш бизнес</h1>
+  <p style="margin-top:18px;max-width:38em;font-size:16px;color:var(--muted);">
+    Продвигаем сайты в ChatGPT, Яндекс Алисе, Perplexity, Gemini и GigaChat.
+    Проверяем видимость, находим причины, улучшаем сайт и внешние источники, измеряем результат.
+  </p>
+  <p style="margin-top:28px;font-size:13px;color:var(--faint);max-width:36em;">
+    Не обещаем первое место в ChatGPT. Работаем с факторами, по которым AI-системы выбирают
+    и используют информацию о компаниях.
+  </p>
+  <div class="grid-3" style="margin-top:40px;">
+    <div class="card"><p class="kicker">Документ</p><p style="margin-top:8px;">КП / GEO-AEO / 2026</p></div>
+    <div class="card"><p class="kicker">Для кого</p><p style="margin-top:8px;">B2B, SaaS, магазины, локальный бизнес</p></div>
+    <div class="card hi"><p class="kicker">Контакт</p><p style="margin-top:8px;"><a href="tel:+79674607178">+7 967 460-71-78</a></p></div>
+  </div>
+  <div class="foot"><span>SELTIKA STUDIO</span><span>01 / 10</span></div>
+</section>
+
+<section class="page">
+  <p class="kicker">Зачем это нужно</p>
+  <h2 style="margin-top:12px;font-size:32px;">Поиск изменился. Клиент получает готовый список, а не десять ссылок</h2>
+  <div class="grid-2" style="margin-top:28px;">
+    <div class="card">
+      <p class="kicker">Раньше</p>
+      <h3 style="margin-top:12px;font-size:20px;">«Купить стеллажи в Казани»</h3>
+      <p style="margin-top:10px;color:var(--muted);font-size:14px;">Человек получал выдачу сайтов. Дальше сам открывал, сравнивал и выбирал.</p>
+    </div>
+    <div class="card hi">
+      <p class="kicker">Сейчас</p>
+      <h3 style="margin-top:12px;font-size:20px;">«Какие компании в Казани продают стеллажи для склада?»</h3>
+      <p style="margin-top:10px;color:var(--muted);font-size:14px;">Нейросеть сразу называет несколько фирм. Если вас нет в ответе — о вас могут не узнать.</p>
+    </div>
+  </div>
+  <p style="margin-top:28px;font-size:16px;max-width:40em;">
+    Короче: вы можете быть первыми в классическом поиске и при этом отсутствовать там, где клиент уже принимает решение.
+  </p>
+  <div class="card" style="margin-top:24px;">
+    <p class="kicker">Что продаёт Seltika Studio</p>
+    <p style="margin-top:10px;font-size:15px;">Одна услуга. Повышение видимости сайта и бренда в AI-поиске. Не CRM, не чат-боты, не отдел продаж, не «AI-сотрудники».</p>
+  </div>
+  <div class="foot"><span>seltikastudio.ru</span><span>02 / 10</span></div>
+</section>
+
+<section class="page">
+  <p class="kicker">Простыми словами</p>
+  <h2 style="margin-top:12px;font-size:32px;">SEO, AEO и GEO — без словаря на первом экране</h2>
+  <div class="grid-3" style="margin-top:24px;">
+    <div class="card">
+      <p class="kicker">SEO</p>
+      <p style="margin-top:10px;font-size:14px;">Помогает сайту появляться в поисковой выдаче.</p>
+    </div>
+    <div class="card">
+      <p class="kicker">AEO</p>
+      <p style="margin-top:10px;font-size:14px;">Помогает странице давать понятный ответ на конкретный вопрос.</p>
+    </div>
+    <div class="card hi">
+      <p class="kicker">GEO</p>
+      <p style="margin-top:10px;font-size:14px;">Помогает сделать информацию о компании пригодной для нейросетей.</p>
+    </div>
+  </div>
+  <h3 style="margin-top:32px;font-size:20px;">Что делает нейросеть, когда её спрашивают «кого выбрать»</h3>
+  <ol style="margin:16px 0 0;padding:0;list-style:none;">
+    <li style="padding-left:36px;margin:10px 0;"><span class="num" style="position:absolute;left:0;">01</span>Понять, какие компании существуют</li>
+    <li style="padding-left:36px;margin:10px 0;"><span class="num" style="position:absolute;left:0;">02</span>Понять, чем они занимаются</li>
+    <li style="padding-left:36px;margin:10px 0;"><span class="num" style="position:absolute;left:0;">03</span>Определить, кто подходит под запрос</li>
+    <li style="padding-left:36px;margin:10px 0;"><span class="num" style="position:absolute;left:0;">04</span>Найти подтверждения</li>
+    <li style="padding-left:36px;margin:10px 0;"><span class="num" style="position:absolute;left:0;">05</span>Сформировать ответ</li>
+    <li style="padding-left:36px;margin:10px 0;"><span class="num" style="position:absolute;left:0;">06</span>При необходимости сослаться на источник</li>
+  </ol>
+  <p style="margin-top:20px;color:var(--muted);font-size:14px;">Ваша задача — чтобы среди этих источников были ваш сайт и ваш бренд. Границы терминов ещё не стандартизированы. Мы не спорим о словаре.</p>
+  <div class="foot"><span>seltikastudio.ru</span><span>03 / 10</span></div>
+</section>
+
+<section class="page">
+  <p class="kicker">Что мы делаем</p>
+  <h2 style="margin-top:12px;font-size:32px;">Семь шагов. За это вы платите</h2>
+  <div class="grid-2" style="margin-top:22px;">
+    <div class="card"><p class="num">01 · Проверяем</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Что нейросети отвечают о вас сейчас. Какие вопросы задают ваши клиенты.</p></div>
+    <div class="card"><p class="num">02 · Находим проблемы</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Почему вас не упоминают, какую информацию AI не понимает, кого ставят вместо вас, каких подтверждений не хватает.</p></div>
+    <div class="card"><p class="num">03 · Улучшаем сайт</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Страницы услуг и продуктов, ответы на вопросы, факты о компании, авторы, связи между страницами, разметка данных.</p></div>
+    <div class="card"><p class="num">04 · Создаём контент</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Не статьи «ради SEO». Материалы, которые отвечают на реальные вопросы и могут стать источником для AI.</p></div>
+    <div class="card"><p class="num">05 · Профиль бренда</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Информация о компании: полная, понятная, непротиворечивая, подтверждённая.</p></div>
+    <div class="card"><p class="num">06 · Внешние источники</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Каталоги, публикации, экспертные материалы — то, из чего нейросети складывают картину бренда.</p></div>
+  </div>
+  <div class="card hi" style="margin-top:14px;"><p class="num">07 · Мониторим</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Регулярно проверяем контрольные запросы и сравниваем: было → сделали → стало.</p></div>
+  <div class="foot"><span>seltikastudio.ru</span><span>04 / 10</span></div>
+</section>
+
+<section class="page">
+  <p class="kicker">Практика</p>
+  <h2 style="margin-top:12px;font-size:32px;">Как это выглядит в ответе нейросети</h2>
+  <p style="margin-top:14px;font-size:16px;">Запрос: «Какие компании продают складское оборудование в Казани?»</p>
+  <div class="grid-2" style="margin-top:22px;">
+    <div class="card">
+      <p class="kicker">Сейчас</p>
+      <p style="margin-top:14px;">01 · Компания А</p>
+      <p>02 · Компания Б</p>
+      <p>03 · Компания В</p>
+      <p style="margin-top:14px;color:var(--amber);font-size:14px;">Вашей компании в ответе нет.</p>
+    </div>
+    <div class="card hi">
+      <p class="kicker">После работы</p>
+      <p style="margin-top:14px;">01 · Компания А</p>
+      <p style="color:var(--blue);">02 · Ваша компания</p>
+      <p>03 · Компания Б</p>
+    </div>
+  </div>
+  <p style="margin-top:22px;color:var(--muted);font-size:14px;">
+    Мы не обещаем конкретную позицию в каждом ответе. AI-ответы могут меняться.
+    Измеряем видимость по заранее согласованному набору запросов.
+  </p>
+  <h3 style="margin-top:28px;font-size:20px;">Метод, если нужны термины</h3>
+  <div class="grid-2" style="margin-top:14px;">
+    <div class="card"><p class="kicker">Technical GEO</p><p style="margin-top:8px;font-size:13px;color:var(--muted);">Сайт технически читается поисковыми и AI-системами.</p></div>
+    <div class="card"><p class="kicker">Content GEO</p><p style="margin-top:8px;font-size:13px;color:var(--muted);">Страницы отвечают на вопросы пользователей.</p></div>
+    <div class="card"><p class="kicker">Entity GEO</p><p style="margin-top:8px;font-size:13px;color:var(--muted);">AI понимает, кто вы, что продаёте, где работаете.</p></div>
+    <div class="card"><p class="kicker">Authority GEO</p><p style="margin-top:8px;font-size:13px;color:var(--muted);">Внешние источники подтверждают информацию о бренде.</p></div>
+  </div>
+  <div class="foot"><span>seltikastudio.ru</span><span>05 / 10</span></div>
+</section>
+
+<section class="page">
+  <p class="kicker">Диагностика</p>
+  <h2 style="margin-top:12px;font-size:32px;">Что именно проверяем</h2>
+  <table style="margin-top:20px;">
+    <thead><tr><th>Область</th><th>Что смотрим</th></tr></thead>
+    <tbody>
+      <tr><td>Бренд</td><td>Понимают ли AI, что это за компания</td></tr>
+      <tr><td>Продукты</td><td>Может ли AI правильно описать продукты</td></tr>
+      <tr><td>Услуги</td><td>Понимает ли, что именно вы предлагаете</td></tr>
+      <tr><td>Запросы</td><td>Появляетесь ли по коммерческим вопросам</td></tr>
+      <tr><td>Конкуренты</td><td>Кого называют вместо вас</td></tr>
+      <tr><td>Источники</td><td>Откуда AI берёт информацию</td></tr>
+      <tr><td>Сайт</td><td>Может ли система нормально прочитать страницы</td></tr>
+      <tr><td>Контент</td><td>Есть ли ответы на реальные вопросы клиентов</td></tr>
+      <tr><td>Связи</td><td>Связаны ли компания, продукты, люди и услуги</td></tr>
+      <tr><td>Внешние сигналы</td><td>Есть ли подтверждения информации о бренде</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:18px;font-size:13px;color:var(--faint);">Бесплатная предварительная проверка — на сайте: seltikastudio.ru, блок «Проверить AI-видимость».</p>
+  <div class="foot"><span>seltikastudio.ru</span><span>06 / 10</span></div>
+</section>
+
+<section class="page">
+  <p class="kicker">Результат</p>
+  <h2 style="margin-top:12px;font-size:32px;">Что будет у вас на руках</h2>
+  <div class="grid-2" style="margin-top:22px;">
+    <div class="card"><p class="kicker">AI Visibility Audit</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Полный отчёт: как нейросети видят вас сейчас и где провалы.</p></div>
+    <div class="card"><p class="kicker">Карта AI-запросов</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Какие вопросы задают клиенты и по каким вас нет в ответе.</p></div>
+    <div class="card"><p class="kicker">Карта конкурентов</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Кого AI рекомендует вместо вас — и почему.</p></div>
+    <div class="card"><p class="kicker">AI-ready сайт</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Структура и контент, которые проще понимать поисковым и AI-системам.</p></div>
+    <div class="card"><p class="kicker">Профиль бренда</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Единая информация о компании, продуктах и экспертах.</p></div>
+    <div class="card"><p class="kicker">Контент + мониторинг</p><p style="margin-top:8px;font-size:14px;color:var(--muted);">Страницы под реальные вопросы и отслеживание видимости во времени.</p></div>
+  </div>
+  <div class="card hi" style="margin-top:16px;">
+    <p style="font-size:14px;">УТП: одна понятная услуга, честный отказ от «гарантированного топ-1», измерение по контрольным запросам, рынок РФ (Алиса, GigaChat) и международный контур (ChatGPT, Perplexity, Gemini).</p>
+  </div>
+  <div class="foot"><span>seltikastudio.ru</span><span>07 / 10</span></div>
+</section>
+
+<section class="page">
+  <p class="kicker">Стоимость</p>
+  <h2 style="margin-top:12px;font-size:32px;">Четыре формата. Цифры «от» — нижняя граница</h2>
+  <p style="margin-top:12px;color:var(--muted);font-size:14px;">Итоговая сумма зависит от размера сайта, числа направлений, регионов и объёма работ. Точную смету даём после аудита.</p>
+  <div class="grid-2" style="margin-top:20px;">
+    <div class="card">
+      <p class="kicker">Разово</p>
+      <h3 style="margin-top:8px;">AI-аудит</h3>
+      <p class="price" style="margin-top:8px;">от 80 000 ₽</p>
+      <ul>
+        <li>Проверка в ChatGPT, Алисе, Perplexity, Gemini, GigaChat</li>
+        <li>Карта вопросов клиентов и конкурентов</li>
+        <li>Проблемы сайта и источников</li>
+        <li>Отчёт и план следующих шагов</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="kicker">Проект</p>
+      <h3 style="margin-top:8px;">GEO/AEO-настройка сайта</h3>
+      <p class="price" style="margin-top:8px;">от 180 000 ₽</p>
+      <ul>
+        <li>Структура страниц услуг и продуктов</li>
+        <li>Прямые ответы на вопросы клиентов</li>
+        <li>Профиль компании</li>
+        <li>Базовый слой внешних источников</li>
+      </ul>
+    </div>
+    <div class="card hi">
+      <p class="kicker">Основной формат · ежемесячно</p>
+      <h3 style="margin-top:8px;">GEO/AEO-продвижение</h3>
+      <p class="price" style="margin-top:8px;">от 90 000 ₽/мес</p>
+      <ul>
+        <li>Контент под реальные AI-вопросы</li>
+        <li>Усиление сайта и профиля бренда</li>
+        <li>Внешние упоминания</li>
+        <li>Ежемесячный срез: было / стало</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="kicker">Ежемесячно</p>
+      <h3 style="margin-top:8px;">Мониторинг AI-видимости</h3>
+      <p class="price" style="margin-top:8px;">от 40 000 ₽/мес</p>
+      <ul>
+        <li>Съём ответов по согласованному списку</li>
+        <li>Динамика упоминаний и формулировок</li>
+        <li>Конкуренты в ответах</li>
+        <li>Короткий ежемесячный отчёт</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>seltikastudio.ru</span><span>08 / 10</span></div>
+</section>
+
+<section class="page">
+  <p class="kicker">Честно</p>
+  <h2 style="margin-top:12px;font-size:32px;">Что входит и что не обещаем</h2>
+  <div class="grid-2" style="margin-top:22px;">
+    <div class="card hi">
+      <p class="kicker">Делаем</p>
+      <ul>
+        <li>Проверку реальных ответов нейросетей</li>
+        <li>Работу с сайтом: структура, факты, ответы</li>
+        <li>Согласование описания компании</li>
+        <li>Внешние источники, которые можно цитировать</li>
+        <li>Повторные срезы по контрольным запросам</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="kicker">Не делаем</p>
+      <ul>
+        <li>Не продаём слот в ChatGPT — его нет</li>
+        <li>Не обещаем постоянное первое место</li>
+        <li>Не подставляем выдуманную статистику</li>
+        <li>Не внедряем CRM, ботов и «AI-отдел продаж»</li>
+        <li>Не начинаем системную работу, пока сайт не индексируется</li>
+      </ul>
+    </div>
+  </div>
+  <h3 style="margin-top:28px;font-size:20px;">Как измеряем</h3>
+  <p style="margin-top:10px;color:var(--muted);font-size:14px;max-width:40em;">
+    Согласованный список вопросов. Съём в выбранных системах: есть бренд / нет / есть, но формулировка чужая.
+    Есть ли ссылка, кого ставят рядом. Сравнение срезов. Один скриншот не считается результатом.
+  </p>
+  <p style="margin-top:16px;color:var(--muted);font-size:14px;max-width:40em;">
+    Срок до первых устойчивых упоминаний зависит от ниши и того, насколько сейчас размыто описание компании.
+    Называем после аудита, не «за 30 дней всем».
+  </p>
+  <div class="foot"><span>seltikastudio.ru</span><span>09 / 10</span></div>
+</section>
+
+<section class="page">
+  <p class="kicker">Следующий шаг</p>
+  <h2 style="margin-top:12px;font-size:32px;">Проверьте видимость или позвоните</h2>
+  <p style="margin-top:16px;max-width:38em;font-size:16px;color:var(--muted);">
+    Один путь: посмотреть, как нейросети видят вас сейчас → увидеть проблемы → решить, нужен аудит, настройка сайта или ежемесячная работа.
+  </p>
+  <div class="card hi" style="margin-top:28px;padding:28px;">
+    <p class="kicker">Контакт</p>
+    <p style="margin-top:12px;font-family:Onest,sans-serif;font-size:28px;"><a href="tel:+79674607178">+7 967 460-71-78</a></p>
+    <p style="margin-top:10px;"><a href="https://seltikastudio.ru">seltikastudio.ru</a></p>
+    <p style="margin-top:6px;color:var(--muted);">Казань · работаем удалённо по России и СНГ</p>
+    <p style="margin-top:18px;font-size:14px;">Предварительная проверка: seltikastudio.ru → «Проверить AI-видимость»</p>
+  </div>
+  <p style="margin-top:36px;font-size:13px;color:var(--faint);max-width:36em;">
+    Документ составлен по публичной оферте услуг SELTIKA STUDIO, сентябрь 2026.
+    Цены «от» — ориентир нижней границы. Не является публичной офертой в смысле ст. 437 ГК РФ:
+    итоговые условия фиксируются в договоре после аудита.
+  </p>
+  <p style="margin-top:40px;font-family:Onest,sans-serif;letter-spacing:0.28em;font-size:12px;color:var(--faint);">BE SEEN. BE CHOSEN.</p>
+  <div class="foot"><span>SELTIKA STUDIO</span><span>10 / 10</span></div>
+</section>
+
+</body>
+</html>
