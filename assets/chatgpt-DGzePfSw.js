@@ -1,1 +1,0 @@
-import{I as e,d as t,n}from"./index-1QCXXu2x.js";import{t as r}from"./knowledge-page-DaLYgjuW.js";var i=e();function a(){return(0,i.jsx)(r,{doc:n,graph:t({path:n.path,title:n.title,description:n.description,crumbs:[{name:`Главная`,path:`/`},{name:`ChatGPT`,path:`/chatgpt`}]})})}export{a as component};
