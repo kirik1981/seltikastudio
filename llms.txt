@@ -1,0 +1,43 @@
+# Seltika Studio
+
+> Seltika Studio (Казань, Россия) — студия GEO и AEO: делаем бренд понятным и цитируемым в ответах ChatGPT, Алисы, Perplexity, GigaChat и Gemini. Это не реклама внутри чата и не гарантия рекомендации конкретной модели.
+
+- Сайт: https://seltikastudio.ru
+- Почта: hello@seltikastudio.ru
+- Telegram: https://t.me/seltikastudiobot
+- X: https://x.com/seltikakazan
+- Город: Казань, Россия. Работаем по РФ и с международным B2B.
+- Не путать с ООО «СЭЛТИКА» (складская техника / опт) и не Stika.
+
+## Что это
+
+GEO (Generative Engine Optimization) и AEO (Answer Engine Optimization) — продолжение SEO: структура, факты, сущность бренда и внешние подтверждения, чтобы модель могла ответить «кто это / кого выбрать».
+
+Слотов в ответах нейросетей нет. Мы увеличиваем вероятность упоминания и измеряем срез по контрольным запросам.
+
+## Форматы
+
+- AI-разбор — диагностика видимости в основных AI-системах, приоритетные запросы, конкуренты, короткий отчёт.
+- AI Visibility System — техника, карта сущностей, контент, мониторинг.
+- AI Market Leadership — системный рост категории.
+
+Старт: заявка на https://seltikastudio.ru/#lead
+
+## Ключевые страницы
+
+- [Главная](https://seltikastudio.ru/): кто мы, сканер видимости, FAQ, заявка.
+- [GEO/AEO агентство в России](https://seltikastudio.ru/geo-aeo-agentstvo-rossiya/): категорийные запросы и честный срез.
+- [Как попасть в ответы ChatGPT](https://seltikastudio.ru/kak-popast-v-otvety-chatgpt/): B2B, без рекламного слота.
+- [AI-разбор бренда](https://seltikastudio.ru/ai-razbor-brenda-i-vidimost/): Perplexity, Алиса, Gemini.
+- [GEO для B2B](https://seltikastudio.ru/geo-b2b/)
+- [AEO для SaaS](https://seltikastudio.ru/aeo-saas/)
+- [Локальный бизнес](https://seltikastudio.ru/local/)
+- [ChatGPT](https://seltikastudio.ru/chatgpt/)
+- [Алиса](https://seltikastudio.ru/alice/)
+- [AI-радар](https://seltikastudio.ru/radar/)
+- [О студии](https://seltikastudio.ru/o-studii/)
+- [Конфиденциальность](https://seltikastudio.ru/privacy/)
+
+## Ограничения
+
+Нет обещания «ChatGPT будет рекомендовать вас». DEMO на сайте — не клиентский отчёт. Сканер на сайте — предварительная гипотеза, не живой краулинг всех моделей.
