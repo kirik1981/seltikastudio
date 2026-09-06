@@ -1,1 +1,0 @@
-import{F as e}from"./index-CVMjksRw.js";import{t}from"./niche-page-CpeXx-Pb.js";var n=e();function r(){return(0,n.jsx)(t,{slug:`ecommerce`})}export{r as component};

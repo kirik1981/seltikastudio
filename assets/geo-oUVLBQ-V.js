@@ -1,1 +1,0 @@
-import{F as e,o as t,p as n}from"./index-CVMjksRw.js";import{t as r}from"./knowledge-page-DU1YpQLW.js";var i=e();function a(){return(0,i.jsx)(r,{doc:n,graph:t})}export{a as component};

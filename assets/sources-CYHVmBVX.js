@@ -1,0 +1,1 @@
+import{I as e,d as t,g as n}from"./index-Bi9LGBlE.js";import{t as r}from"./knowledge-page-CZS42kk_.js";var i=e(),a=t({path:n.path,title:n.title,description:n.description,type:`WebPage`,crumbs:[{name:`Главная`,path:`/`},{name:`Источники`,path:`/sources`}],datePublished:`2026-09-06`});function o(){return(0,i.jsx)(r,{doc:n,graph:a})}export{o as component};
