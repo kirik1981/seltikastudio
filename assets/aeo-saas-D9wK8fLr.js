@@ -1,0 +1,1 @@
+import{I as e}from"./index-CQaYRTk7.js";import{t}from"./niche-page-B41YzGzM.js";var n=e();function r(){return(0,n.jsx)(t,{slug:`aeo-saas`})}export{r as component};

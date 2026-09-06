@@ -1,1 +1,0 @@
-import{I as e}from"./index-VH2S3-PT.js";import{t}from"./niche-page-D7Aoe8CB.js";var n=e();function r(){return(0,n.jsx)(t,{slug:`ecommerce`})}export{r as component};

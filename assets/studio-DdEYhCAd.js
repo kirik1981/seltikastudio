@@ -1,1 +1,0 @@
-import{I as e,_ as t,l as n}from"./index-VH2S3-PT.js";import{t as r}from"./knowledge-page-5gxdypiw.js";var i=e();function a(){return(0,i.jsx)(r,{doc:t,graph:n})}export{a as component};
