@@ -69,6 +69,7 @@ B2B, SaaS, интернет-магазины и локальный бизнес 
 - [Локальный бизнес](https://seltikastudio.ru/local)
 - [ChatGPT](https://seltikastudio.ru/chatgpt)
 - [Алиса](https://seltikastudio.ru/alice)
+- [Источники](https://seltikastudio.ru/sources)
 - [Полный профиль](https://seltikastudio.ru/llms-full.txt)
 
 ## Типичные вопросы, на которые этот сайт отвечает

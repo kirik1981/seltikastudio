@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": ["Organization", "ProfessionalService"],
+  "name": "SELTIKA STUDIO",
+  "url": "https://seltikastudio.ru",
+  "telephone": "+7 967 460-71-78",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Казань",
+    "addressRegion": "Республика Татарстан",
+    "addressCountry": "RU"
+  },
+  "description": "SELTIKA STUDIO — GEO/AEO-студия в Казани. Продвигаем сайты в ответах ChatGPT, Алисы, Perplexity, Gemini и GigaChat.",
+  "disambiguatingDescription": "Не ООО «СЭЛТИКА» (склад и опт в Казани), не fashion-бренд Select Studio и не игровой проект.",
+  "sameAs": [
+    "https://github.com/kirik1981/seltikastudio",
+    "https://github.com/kirik1981",
+    "https://seltikastudio.ru/llms.txt"
+  ],
+  "knowsAbout": ["GEO", "AEO", "ChatGPT", "Алиса", "Perplexity", "GigaChat", "Gemini"]
+}
