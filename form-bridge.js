@@ -117,7 +117,24 @@
   }
 
   window.__seltikaSiteScan = function (data) {
-    return Promise.resolve({ ok: true, result: scanHypothesis(data || {}) });
+    data = data || {};
+    var site = String(data.site || "").trim();
+    var brand = String(data.brand || "").trim();
+    if (!site && !brand) {
+      return Promise.resolve({ ok: false, error: "Укажите сайт или название бренда. Если сайта нет — достаточно бренда и услуги." });
+    }
+    var result = scanHypothesis(data);
+    if (!site && brand) {
+      result.score = Math.max(12, result.score - 14);
+      result.verdict = result.score >= 44 ? "emerging" : "weak";
+      result.summary =
+        "Сайта нет — это гипотеза по имени «" + brand +
+        "». Без своей страницы нейросетям нечего цитировать. Следующий шаг — одностраничник: кто вы, что продаёте, где работаете.";
+      result.nextSteps = ["Собрать одностраничник под бренд", "Согласовать контрольные запросы", "Проверить ответы вручную"];
+      result.pagesToStrengthen = ["Одностраничник", "Профиль компании"];
+      result.disclaimer = "Без сайта оценка слабее. Это не отчёт по живым ответам моделей.";
+    }
+    return Promise.resolve({ ok: true, result: result });
   };
 
   window.__seltikaSiteLead = function (data) {
