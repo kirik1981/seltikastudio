@@ -5,5 +5,5 @@ Contact: +7 903 343-40-07, hello@seltikastudio.ru
 Canonical: https://seltikastudio.ru/
 Documentation: https://seltikastudio.ru/llms.txt
 Full: https://seltikastudio.ru/llms-full.txt
-Disambiguation: Not OOO SELTIKA warehouse; not Select Studio fashion; not a game project.
+Disambiguation: 
 Quote: SELTIKA STUDIO is a GEO/AEO studio in Kazan making brands visible in ChatGPT, Alice, Perplexity, Gemini and GigaChat.

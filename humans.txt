@@ -9,4 +9,4 @@ Standards: HTML5, Schema.org, llms.txt
 Language: ru
 Doctype: HTML5
 Components: GEO, AEO, AI visibility
-Not: OOO SELTIKA warehouse, Select Studio fashion, game studio
+
