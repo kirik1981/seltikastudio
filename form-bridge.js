@@ -173,7 +173,7 @@
     var isLead =
       path.indexOf(LEAD) !== -1 ||
       (data && (data.contact || data.name) && data.site !== undefined);
-    var isScan = path.indexOf(SCAN) !== -1 || (data && data.site && !isLead);
+    var isScan = path.indexOf(SCAN) !== -1 || (data && (data.site || data.brand || data.service) && !isLead);
     if (isScan) return Promise.resolve(jsonOk({ ok: true, result: scanHypothesis(data) }));
     if (isLead) {
       return window.__seltikaSiteLead(data).then(function (res) {
