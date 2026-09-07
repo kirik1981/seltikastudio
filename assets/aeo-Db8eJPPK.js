@@ -1,1 +1,1 @@
-import{I as e,a as t,p as n}from"./index-DS93XF4a.js";import{t as r}from"./knowledge-page-Cv4hPjDZ.js";var i=e();function a(){return(0,i.jsx)(r,{doc:n,graph:t})}export{a as component};
+import{I as e,a as t,p as n}from"./index-fix2.js";import{t as r}from"./knowledge-page-Cv4hPjDZ.js";var i=e();function a(){return(0,i.jsx)(r,{doc:n,graph:t})}export{a as component};

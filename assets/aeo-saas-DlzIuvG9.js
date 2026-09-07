@@ -1,1 +1,1 @@
-import{I as e}from"./index-DS93XF4a.js";import{t}from"./niche-page-DsteC1Hg.js";var n=e();function r(){return(0,n.jsx)(t,{slug:`aeo-saas`})}export{r as component};
+import{I as e}from"./index-fix2.js";import{t}from"./niche-page-DsteC1Hg.js";var n=e();function r(){return(0,n.jsx)(t,{slug:`aeo-saas`})}export{r as component};
