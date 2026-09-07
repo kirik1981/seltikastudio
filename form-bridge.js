@@ -184,81 +184,145 @@
   };
 })();
 
-/* Chrome/Blink: mix-blend grain kills animations; SVG setAttribute often does not repaint. */
+/* Mobile: SVG cx/cy often does not paint; hydrate replaces animated nodes; grain kills compositor. */
 (function () {
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var style = document.createElement("style");
   style.setAttribute("data-seltika-motion", "1");
   style.textContent =
-    ".grain{mix-blend-mode:normal!important;opacity:.05!important}" +
-    ".logo-float,.orbit-badge-spin,.marquee,.orbit-ring,.live-dot,.caret,.radar-sweep{" +
-    "-webkit-animation-play-state:running!important;animation-play-state:running!important}" +
-    ".logo-float{-webkit-animation:logo-float 7s ease-in-out infinite;animation:logo-float 7s ease-in-out infinite;will-change:transform}" +
-    ".orbit-badge-spin{-webkit-animation:orbit-spin 22s linear infinite;animation:orbit-spin 22s linear infinite;will-change:transform}" +
-    ".marquee{-webkit-animation:marquee-slide 28s linear infinite;animation:marquee-slide 28s linear infinite;will-change:transform}" +
-    ".orbit-ring{-webkit-animation:orbit-spin 48s linear infinite;animation:orbit-spin 48s linear infinite}" +
-    ".eg-html-dot{position:absolute;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;pointer-events:none;z-index:2;will-change:left,top}";
+    ".grain{mix-blend-mode:normal!important;opacity:.04!important}" +
+    "@media (pointer:coarse){.grain{display:none!important}}" +
+    "@-webkit-keyframes seltika-float{0%,100%{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}50%{-webkit-transform:translate3d(0,-10px,0);transform:translate3d(0,-10px,0)}}" +
+    "@keyframes seltika-float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-10px,0)}}" +
+    "@-webkit-keyframes seltika-spin{from{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}" +
+    "@keyframes seltika-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}" +
+    "@-webkit-keyframes seltika-marquee{from{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}to{-webkit-transform:translate3d(-33.333%,0,0);transform:translate3d(-33.333%,0,0)}}" +
+    "@keyframes seltika-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-33.333%,0,0)}}" +
+    "@-webkit-keyframes seltika-pulse{0%,100%{opacity:.45;-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(1.25);transform:scale(1.25)}}" +
+    "@keyframes seltika-pulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}" +
+    (reduce ? "" :
+      ".logo-float{-webkit-animation:seltika-float 7s ease-in-out infinite!important;animation:seltika-float 7s ease-in-out infinite!important;-webkit-transform:translateZ(0);transform:translateZ(0)}" +
+      ".orbit-badge-spin,.orbit-ring{-webkit-animation:seltika-spin 22s linear infinite!important;animation:seltika-spin 22s linear infinite!important;-webkit-transform-origin:50% 50%;transform-origin:50% 50%}" +
+      ".orbit-ring{-webkit-animation-duration:48s!important;animation-duration:48s!important}" +
+      ".marquee{-webkit-animation:seltika-marquee 28s linear infinite!important;animation:seltika-marquee 28s linear infinite!important}" +
+      ".radar-sweep{-webkit-animation:seltika-spin 5.5s linear infinite!important;animation:seltika-spin 5.5s linear infinite!important}" +
+      ".live-dot{-webkit-animation:seltika-pulse 2.2s ease-in-out infinite!important;animation:seltika-pulse 2.2s ease-in-out infinite!important}" +
+      ".caret{-webkit-animation:seltika-pulse 1s step-end infinite!important;animation:seltika-pulse 1s step-end infinite!important}"
+    ) +
+    ".eg-html-dot{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;pointer-events:none;z-index:3;" +
+    "-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);will-change:transform;box-shadow:0 0 8px currentColor}";
   document.documentElement.appendChild(style);
 
-  function setCxCy(el, x, y) {
-    try {
-      el.cx.baseVal.value = x;
-      el.cy.baseVal.value = y;
-    } catch (e) {
-      el.setAttribute("cx", String(x));
-      el.setAttribute("cy", String(y));
+  var rafId = 0;
+  var spokes = [];
+  var hostEl = null;
+  var svgEl = null;
+
+  function map(x, y) {
+    if (!svgEl || !hostEl) return { x: 0, y: 0 };
+    var vb = svgEl.viewBox.baseVal;
+    var sr = svgEl.getBoundingClientRect();
+    var hr = hostEl.getBoundingClientRect();
+    var w = vb && vb.width ? vb.width : 640;
+    var h = vb && vb.height ? vb.height : 400;
+    return {
+      x: ((x - (vb && vb.x ? vb.x : 0)) / w) * sr.width + (sr.left - hr.left),
+      y: ((y - (vb && vb.y ? vb.y : 0)) / h) * sr.height + (sr.top - hr.top)
+    };
+  }
+
+  function clearDots(host) {
+    var old = host.querySelectorAll(".eg-html-dot");
+    for (var i = 0; i < old.length; i++) old[i].parentNode.removeChild(old[i]);
+  }
+
+  function tick(now) {
+    for (var i = 0; i < spokes.length; i++) {
+      var s = spokes[i];
+      if (!s.el || !s.el.isConnected) continue;
+      var p = (now / s.dur) % 1;
+      var k = p < 0.5 ? p * 2 : 2 - p * 2;
+      var pt = map(s.x1 + (s.x2 - s.x1) * k, s.y1 + (s.y2 - s.y1) * k);
+      s.el.style.webkitTransform = "translate3d(" + pt.x + "px," + pt.y + "px,0)";
+      s.el.style.transform = "translate3d(" + pt.x + "px," + pt.y + "px,0)";
     }
+    rafId = requestAnimationFrame(tick);
   }
 
   function bootGraph() {
-    var svg = document.querySelector("#graph svg");
-    if (!svg || svg.getAttribute("data-seltika-motion") === "on") return false;
+    var section = document.getElementById("graph");
+    if (!section) return false;
+    var svg = section.querySelector("svg");
+    if (!svg) return false;
+    var panel = svg.parentNode;
+    if (!panel) return false;
+    if (panel.getAttribute("data-seltika-dots") === "on" && panel.querySelector(".eg-html-dot")) return true;
+
+    if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
+    clearDots(panel);
+    var cs = window.getComputedStyle(panel);
+    if (cs.position === "static") panel.style.position = "relative";
+
     var groups = svg.querySelectorAll("g");
-    var spokes = [];
+    spokes = [];
     for (var i = 0; i < groups.length; i++) {
       var line = groups[i].querySelector("line");
-      var dot = groups[i].querySelector("circle");
-      if (!line || !dot) continue;
+      var circle = groups[i].querySelector("circle");
+      if (!line || !circle) continue;
       var x1 = parseFloat(line.getAttribute("x1"));
       var y1 = parseFloat(line.getAttribute("y1"));
       var x2 = parseFloat(line.getAttribute("x2"));
       var y2 = parseFloat(line.getAttribute("y2"));
       if (isNaN(x1) || isNaN(x2)) continue;
-      var clone = dot.cloneNode(true);
-      dot.parentNode.replaceChild(clone, dot);
-      spokes.push({ el: clone, x1: x1, y1: y1, x2: x2, y2: y2, dur: 3600 + spokes.length * 350 });
+      circle.style.opacity = "0";
+      var dot = document.createElement("div");
+      dot.className = "eg-html-dot";
+      var fill = circle.getAttribute("fill") || "#22B8FF";
+      dot.style.background = fill;
+      dot.style.color = fill;
+      panel.appendChild(dot);
+      spokes.push({ el: dot, x1: x1, y1: y1, x2: x2, y2: y2, dur: 2800 + spokes.length * 400 });
     }
     if (!spokes.length) return false;
+    hostEl = panel;
+    svgEl = svg;
+    panel.setAttribute("data-seltika-dots", "on");
     svg.setAttribute("data-seltika-motion", "on");
-    var t0 = performance.now();
-    function tick(now) {
-      var t = now - t0;
-      for (var i = 0; i < spokes.length; i++) {
-        var s = spokes[i];
-        var p = (t / s.dur) % 1;
-        var k = p < 0.5 ? p * 2 : 2 - p * 2;
-        setCxCy(s.el, s.x1 + (s.x2 - s.x1) * k, s.y1 + (s.y2 - s.y1) * k);
-      }
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(tick);
     return true;
   }
 
-  function start() {
-    if (!bootGraph()) {
-      var n = 0;
-      var id = setInterval(function () {
-        n += 1;
-        if (bootGraph() || n > 20) clearInterval(id);
-      }, 400);
-    }
+  function watch() {
+    bootGraph();
+    var section = document.getElementById("graph");
+    if (!section || section._seltikaObs) return;
+    section._seltikaObs = new MutationObserver(function () {
+      var panel = section.querySelector(".panel") || (section.querySelector("svg") && section.querySelector("svg").parentNode);
+      if (!panel) return;
+      if (!panel.querySelector(".eg-html-dot")) {
+        panel.removeAttribute("data-seltika-dots");
+        bootGraph();
+      }
+    });
+    section._seltikaObs.observe(section, { childList: true, subtree: true });
   }
+
+  function start() {
+    watch();
+    var n = 0;
+    var id = setInterval(function () {
+      n += 1;
+      watch();
+      if (n > 25) clearInterval(id);
+    }, 400);
+  }
+
+  window.addEventListener("resize", function () {
+    if (spokes.length) bootGraph();
+  });
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
   else start();
-  window.addEventListener("load", function () {
-    setTimeout(start, 600);
-  });
+  window.addEventListener("load", function () { setTimeout(watch, 500); setTimeout(watch, 1600); });
 })();
