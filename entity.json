@@ -1,6 +1,9 @@
 {
   "@context": "https://schema.org",
-  "@type": ["Organization", "ProfessionalService"],
+  "@type": [
+    "Organization",
+    "ProfessionalService"
+  ],
   "name": "SELTIKA STUDIO",
   "url": "https://seltikastudio.ru",
   "telephone": "+7 903 343-40-07",
@@ -18,5 +21,13 @@
     "https://github.com/kirik1981",
     "https://seltikastudio.ru/llms.txt"
   ],
-  "knowsAbout": ["GEO", "AEO", "ChatGPT", "Алиса", "Perplexity", "GigaChat", "Gemini"]
+  "knowsAbout": [
+    "GEO",
+    "AEO",
+    "ChatGPT",
+    "Алиса",
+    "Perplexity",
+    "GigaChat",
+    "Gemini"
+  ]
 }
