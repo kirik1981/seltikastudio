@@ -14,7 +14,7 @@
     "addressRegion": "Республика Татарстан",
     "addressCountry": "RU"
   },
-  "description": "SELTIKA STUDIO — GEO/AEO-студия в Казани. Продвигаем сайты в ответах ChatGPT, Алисы, Perplexity, Gemini и GigaChat.",
+  "description": "SELTIKA STUDIO — GEO/AEO-студия в Казани. Продвигаем сайты в ответах ChatGPT, Алисы, Perplexity, GigaChat, Gemini, Grok и Claude.",
   
   "sameAs": [
     "https://github.com/kirik1981/seltikastudio",
@@ -28,6 +28,8 @@
     "Алиса",
     "Perplexity",
     "GigaChat",
-    "Gemini"
+    "Gemini",
+    "Grok",
+    "Claude"
   ]
 }

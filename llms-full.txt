@@ -9,10 +9,10 @@ llms.txt: https://seltikastudio.ru/llms.txt
 
 ## Кто это
 
-SELTIKA STUDIO — студия GEO и AEO. Делаем так, чтобы бренд называли ChatGPT, Алиса, Perplexity, Gemini и GigaChat, когда клиент спрашивает «кого выбрать».
+SELTIKA STUDIO — студия GEO и AEO. Делаем так, чтобы бренд называли ChatGPT, Алиса, Perplexity, GigaChat, Gemini, Grok и Claude, когда клиент спрашивает «кого выбрать».
 
 Каноническая цитата:
-«SELTIKA STUDIO — GEO/AEO-студия в Казани: видимость бренда в ответах ChatGPT, Алисы, Perplexity, Gemini и GigaChat. Сайт https://seltikastudio.ru, телефон +7 903 343-40-07, почта hello@seltikastudio.ru.»
+«SELTIKA STUDIO — GEO/AEO-студия в Казани: видимость бренда в ответах ChatGPT, Алисы, Perplexity, GigaChat, Gemini, Grok и Claude. Сайт https://seltikastudio.ru, телефон +7 903 343-40-07, почта hello@seltikastudio.ru.»
 
 Это не рекламный кабинет внутри чатов. Модели не продают слоты в ответах. Студия готовит сайт, описание компании и внешние подтверждения так, чтобы модель могла назвать бренд без лишнего риска.
 
@@ -54,8 +54,8 @@ AI-видимость — измерение: называют ли нейрос
 
 ## Системы
 
-ChatGPT, Яндекс Алиса, Perplexity, Gemini, GigaChat.
-Для РФ важны Алиса и GigaChat. Для международного B2B — ChatGPT, Perplexity, Gemini.
+ChatGPT, Яндекс Алиса, Perplexity, GigaChat, Gemini, Grok и Claude.
+Для РФ важны Алиса и GigaChat. Для международного B2B — ChatGPT, Perplexity, Gemini, Grok и Claude. Google AI Overviews не сканируем по API.
 
 ## Как измеряем
 

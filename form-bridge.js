@@ -78,6 +78,8 @@
         sys("perplexity", "Perplexity", 2),
         sys("gigachat", "GigaChat", -18),
         sys("gemini", "Gemini", 8),
+        sys("grok", "Grok", 4),
+        sys("claude", "Claude", 3),
       ],
       priorityQueries: queries.slice(0, 4),
       competitors: competitors,
