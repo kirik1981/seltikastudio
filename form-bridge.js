@@ -159,10 +159,10 @@
     })
       .then(function (r) {
         if (r.ok) return { ok: true };
-        return { ok: false, error: "Не удалось отправить. Напишите на hello@seltikastudio.ru или позвоните +7 903 343-40-07." };
+        return { ok: false, error: "Не удалось отправить. Напишите на hello@seltikastudio.ru, в Telegram @seltikastudiobot или позвоните +7 903 343-40-07." };
       })
       .catch(function () {
-        return { ok: false, error: "Не удалось отправить. Напишите на hello@seltikastudio.ru или позвоните +7 903 343-40-07." };
+        return { ok: false, error: "Не удалось отправить. Напишите на hello@seltikastudio.ru, в Telegram @seltikastudiobot или позвоните +7 903 343-40-07." };
       });
   };
 
