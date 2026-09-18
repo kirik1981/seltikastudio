@@ -15,12 +15,10 @@
     "addressCountry": "RU"
   },
   "description": "SELTIKA STUDIO — GEO/AEO-студия в Казани. Продвигаем сайты в ответах ChatGPT, Алисы, Perplexity, GigaChat, Gemini, Grok и Claude.",
-  
   "sameAs": [
-    "https://github.com/kirik1981/seltikastudio",
-    "https://github.com/kirik1981",
     "https://t.me/seltikastudiobot",
-    "https://seltikastudio.ru/llms.txt"
+    "https://github.com/kirik1981/seltikastudio",
+    "https://github.com/kirik1981"
   ],
   "knowsAbout": [
     "GEO",
@@ -32,5 +30,6 @@
     "Gemini",
     "Grok",
     "Claude"
-  ]
+  ],
+  "disambiguatingDescription": "SELTIKA STUDIO — студия GEO/AEO в Казани. Не продаём место в ChatGPT. Не склад и не стеллажи. Контакт: +7 903 343-40-07, hello@seltikastudio.ru, https://t.me/seltikastudiobot."
 }
