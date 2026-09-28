@@ -7,3 +7,12 @@ header nav[aria-label="Основное"] a,header .lg\:flex a{white-space:nowra
 }
 @media (min-width:1024px) and (max-width:1199px){header a[href^="tel:"]{display:none}}
 #mobile-nav[hidden]{display:none!important}
+
+/* v3: content must never stay invisible if JS is off or blocked */
+html:not(.js) .reveal{opacity:1!important;filter:none!important;transform:none!important}
+@media print{.reveal{opacity:1!important;filter:none!important;transform:none!important}}
+#mobile-nav{max-height:calc(100dvh - 4rem);overflow-y:auto}
+section.hero-spot ul button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+[data-typed]{white-space:pre-wrap}
+/* one-shot build animations (search rows, bars) start when scrolled into view, not at page load off-screen */
+html.js .serp-row:not(.seltika-play),html.js .bar-fill:not(.seltika-play){-webkit-animation-play-state:paused!important;animation-play-state:paused!important}

@@ -228,6 +228,7 @@
   (document.head || document.documentElement).appendChild(style);
 
   function markReveal(force) {
+    if (window.__seltikaRevealIO) return; /* static-ui.js runs IntersectionObserver scroll reveal */
     var nodes = document.querySelectorAll(".reveal");
     var h = window.innerHeight || 800;
     for (var i = 0; i < nodes.length; i++) {
