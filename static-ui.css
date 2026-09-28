@@ -1,0 +1,9 @@
+/* static-ui.css — header fit after static HTML became authoritative (6 nav links + phone + Telegram) */
+header nav[aria-label="Основное"] a,header .lg\:flex a{white-space:nowrap}
+@media (min-width:1024px) and (max-width:1439px){
+  header nav[aria-label="Основное"]{gap:1.1rem}
+  header .lg\:flex.items-center.gap-5{gap:.9rem}
+  header a[href="https://t.me/seltikastudiobot"]{display:none}
+}
+@media (min-width:1024px) and (max-width:1199px){header a[href^="tel:"]{display:none}}
+#mobile-nav[hidden]{display:none!important}
