@@ -132,7 +132,7 @@
         h += '</ul>';
         if (r.priorityQueries && r.priorityQueries.length) h += '<p class="mt-3">Контрольные запросы: ' + r.priorityQueries.map(esc).join('; ') + '</p>';
         h += '<p class="mt-3 text-xs text-muted">' + esc(r.disclaimer) + '</p>';
-        h += '<p class="mt-3"><a class="text-primary hover:underline" href="/#lead">Получить полный разбор →</a></p>';
+        h += '<p class="mt-3"><a class="text-primary hover:underline" href="/#lead">Заказать AI-аудит →</a></p>';
         var out = box(form, ''); out.innerHTML = h;
         var ring = out.querySelector('[data-ring]');
         if (ring) requestAnimationFrame(function () { requestAnimationFrame(function () { ring.setAttribute('stroke-dashoffset', (C - sc / 100 * C).toFixed(2)); }); });
@@ -150,7 +150,7 @@
         busy(form, false);
         if (res && res.ok) {
           form.innerHTML = '<p class="font-display text-xl" tabindex="-1">Заявка принята</p>' +
-            '<p class="mt-3 text-sm leading-relaxed text-muted">Свяжемся по телефону, уточним 3–5 приоритетных запросов и покажем, где ваш бренд уже виден нейросетям, а где его заменяют конкуренты.</p>' +
+            '<p class="mt-3 text-sm leading-relaxed text-muted">Ответим в течение рабочего дня: уточним задачу и предложим, с чего начать — аудит, настройку или продвижение.</p>' +
             '<p class="mt-4 text-sm"><a class="text-primary hover:underline" href="tel:+79033434007">+7 903 343-40-07</a> · <a class="text-primary hover:underline" href="mailto:hello@seltikastudio.ru">hello@seltikastudio.ru</a></p>';
           var p = form.querySelector('p'); if (p) p.focus();
         } else {
