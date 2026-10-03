@@ -1,4 +1,4 @@
-/*! static-ui.js v5 — vanilla helpers after SPA hydration is disabled: menu, forms, package choice, cookie notice, motion */
+/*! static-ui.js v6 — vanilla helpers after SPA hydration is disabled: menu, forms, package choice, cookie notice, motion */
 (function () {
   function getNavLinks() {
     var desktop = document.querySelector('nav[aria-label="Основное"]');
@@ -226,19 +226,21 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 
-/* Cookie notice: the site uses Yandex Metrica (with Webvisor). Shown once; dismissal kept in localStorage. */
+/* Cookie notice + consent: Yandex Metrica (with Webvisor) loads only after «Понятно».
+   Consent kept in localStorage (same key as the inline loader in <head>); notice shown until accepted. */
 (function () {
-  var KEY = 'ss-cookie-notice-2026-10';
+  var KEY = 'ss-metrika-consent-2026-10';
   function show() {
-    try { if (localStorage.getItem(KEY)) return; } catch (e) {}
+    try { if (localStorage.getItem(KEY) === 'granted') return; } catch (e) {}
     if (document.getElementById('cookie-notice')) return;
     var el = document.createElement('div');
     el.id = 'cookie-notice';
     el.setAttribute('role', 'region');
     el.setAttribute('aria-label', 'Cookies');
-    el.innerHTML = '<p>Сайт использует cookies и Яндекс Метрику с Вебвизором: считаем посещения и смотрим, как пользуются страницами. Имя и контакт из формы Метрика не записывает. <a href="/privacy/">Подробнее</a></p><button type="button">Понятно</button>';
+    el.innerHTML = '<p>Сайт использует cookies и Яндекс Метрику с Вебвизором: считаем посещения и смотрим, как пользуются страницами. Метрика включится, только когда вы нажмёте «Понятно». Имя и контакт из формы Метрика не записывает. <a href="/privacy/">Подробнее</a></p><button type="button">Понятно</button>';
     el.querySelector('button').addEventListener('click', function () {
-      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      try { localStorage.setItem(KEY, 'granted'); } catch (e) {}
+      if (typeof window.ssMetrikaLoad === 'function') window.ssMetrikaLoad();
       el.parentNode && el.parentNode.removeChild(el);
     });
     document.body.appendChild(el);
