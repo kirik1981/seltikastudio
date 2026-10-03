@@ -1,4 +1,4 @@
-/*! static-ui.js v3 — vanilla helpers after SPA hydration is disabled: menu, forms, motion */
+/*! static-ui.js v5 — vanilla helpers after SPA hydration is disabled: menu, forms, package choice, cookie notice, motion */
 (function () {
   function getNavLinks() {
     var desktop = document.querySelector('nav[aria-label="Основное"]');
@@ -10,7 +10,7 @@
     }
     if (!links.length) {
       links = [
-        { href: '/#scanner', text: 'Проверка' },
+        { href: '/#scanner', text: 'Что проверим' },
         { href: '/#work', text: 'Как работаем' },
         { href: '/geo/', text: 'GEO' },
         { href: '/#pricing', text: 'Стоимость' },
@@ -28,10 +28,16 @@
         var text = (a.textContent || '').trim();
         if (!text) return;
         if (!links.some(function (l) { return l.href === href && l.text === text; })) {
-          links.push({ href: href, text: text });
+          links.push({ href: href, text: text, plan: a.getAttribute('data-plan') || '' });
         }
       });
     }
+    // Messengers and phone: on mobile the header shows only the burger, so contacts live in the menu
+    [
+      { href: 'https://t.me/seltikastudiobot?start=audit', text: 'Telegram: @seltikastudiobot', ext: true },
+      { href: 'https://wa.me/79033434007', text: 'WhatsApp', ext: true },
+      { href: 'tel:+79033434007', text: '+7 903 343-40-07' }
+    ].forEach(function (l) { if (!links.some(function (x) { return x.href === l.href; })) links.push(l); });
     return links;
   }
 
@@ -50,6 +56,9 @@
       a.href = l.href;
       a.className = 'rounded-md px-3 py-3 text-base text-foreground hover:bg-muted/40';
       a.textContent = l.text;
+      if (l.ext) { a.target = '_blank'; a.rel = 'noopener'; }
+      var dp = l.plan || (/[?&]plan=([a-z]+)/.exec(l.href || '') || [])[1];
+      if (dp) a.setAttribute('data-plan', dp);
       a.addEventListener('click', function () { closeMenu(btn, panel); });
       nav.appendChild(a);
     });
@@ -93,10 +102,11 @@
   else initMenu();
 })();
 
-/* Forms without React: scanner (local hypothesis) + lead (POST to n8n via form-bridge). */
+/* Forms without React: free question preview (no scores) + lead (POST to n8n via form-bridge) + package choice. */
 (function () {
-  var LABELS = { weak: 'Слабая видимость', emerging: 'Появляется точечно', visible: 'Уже заметен', strong: 'Устойчивое присутствие' };
-  var STATUS = { likely: 'вероятно', possible: 'возможно', unlikely: 'маловероятно' };
+  var TG = 'https://t.me/seltikastudiobot?start=audit';
+  var WA = 'https://wa.me/79033434007';
+  var PLANS = { audit: 1, landing: 1, setup: 1, system: 1, monitor: 1 };
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function data(form) { var o = {}; new FormData(form).forEach(function (v, k) { o[k] = String(v); }); return o; }
   function box(form, cls) {
@@ -110,48 +120,95 @@
     if (on) { b.dataset.label = b.innerHTML; b.disabled = true; b.textContent = text; }
     else if (b.dataset.label) { b.disabled = false; b.innerHTML = b.dataset.label; }
   }
+  function leadForms() { return [].slice.call(document.querySelectorAll('form')).filter(function (f) { return f.querySelector('[name="contact"]'); }); }
+
+  /* ---- package (plan) choice: kept in a visible <select>, so it survives scrolling on mobile ---- */
+  function setPlan(plan) {
+    if (!PLANS[plan]) return;
+    leadForms().forEach(function (f) { var s = f.querySelector('select[name="plan"]'); if (s) s.value = plan; });
+  }
+  function goLead(plan, prefill) {
+    var lead = document.getElementById('lead');
+    if (!lead) return false;
+    if (plan) setPlan(plan);
+    var f = leadForms()[0];
+    if (f && prefill) {
+      Object.keys(prefill).forEach(function (k) { var el = f.querySelector('[name="' + k + '"]'); if (el && !el.value && prefill[k]) el.value = prefill[k]; });
+    }
+    try { history.replaceState(null, '', location.pathname + location.search + '#lead'); } catch (e) {}
+    lead.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var first = f && f.querySelector('input[name="name"]');
+    if (first) setTimeout(function () { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }, 450);
+    return true;
+  }
+  function planFromUrl() {
+    var m = /[?&]plan=([a-z]+)/.exec(location.search) || /[?&]plan=([a-z]+)/.exec(location.hash);
+    return m ? m[1] : '';
+  }
+  function initPlans() {
+    var p = planFromUrl();
+    if (p) setPlan(p);
+    if (/^#lead\?/.test(location.hash) && document.getElementById('lead')) setTimeout(function () { goLead(p); }, 60);
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[data-plan]');
+      if (!a) return;
+      var url; try { url = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+      if (url.pathname !== location.pathname || !document.getElementById('lead')) return; /* other page: ?plan= in the URL does the job */
+      e.preventDefault();
+      goLead(a.getAttribute('data-plan'));
+    });
+  }
+
+  /* ---- free question preview: examples by template, no numbers about the visitor ---- */
   function onScan(form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var d = data(form);
-      if (!d.site.trim() && !d.brand.trim()) { box(form, 'text-red-400').textContent = 'Укажите сайт или название бренда'; return; }
-      if (!window.__seltikaSiteScan) { box(form, 'text-red-400').textContent = 'Проверка временно недоступна.'; return; }
-      busy(form, true, 'Проверяем…');
+      if (!window.__seltikaSiteScan) { box(form, 'text-red-400').textContent = 'Сейчас не работает. Напишите нам в Telegram: t.me/seltikastudiobot'; return; }
       window.__seltikaSiteScan(d).then(function (res) {
-        busy(form, false);
-        if (!res || !res.ok) { box(form, 'text-red-400').textContent = (res && res.error) || 'Не удалось выполнить проверку.'; return; }
+        if (!res || !res.ok) { box(form, 'text-red-400').textContent = (res && res.error) || 'Укажите услугу или нишу.'; return; }
         var r = res.result, h = '';
-        var C = 2 * Math.PI * 28, sc = Math.max(0, Math.min(100, Number(r.score) || 0));
-        h += '<div class="flex items-center gap-4"><div class="relative size-16 shrink-0" aria-label="Индекс ' + sc + ' из 100">' +
-          '<svg viewBox="0 0 64 64" class="score-ring size-16" aria-hidden="true"><circle cx="32" cy="32" r="28" fill="none" stroke="rgb(255 255 255 / 0.08)" stroke-width="4"></circle>' +
-          '<circle data-ring="' + sc + '" cx="32" cy="32" r="28" fill="none" stroke="#22B8FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="' + C.toFixed(2) + '" stroke-dashoffset="' + C.toFixed(2) + '" style="transition:stroke-dashoffset 900ms cubic-bezier(0.22,1,0.36,1)"></circle></svg>' +
-          '<span class="absolute inset-0 flex items-center justify-center font-display text-sm tabular-nums">' + sc + '</span></div>';
-        h += '<p class="font-display text-xl">' + esc(LABELS[r.verdict] || r.verdict) + ' · ' + esc(r.score) + '/100</p></div>';
-        h += '<p class="mt-2 text-muted">' + esc(r.summary) + '</p><ul class="mt-3 space-y-1">';
-        (r.systems || []).forEach(function (s) { h += '<li>' + esc(s.name) + ': ' + esc(STATUS[s.status] || s.status) + ' (' + esc(s.likelihood) + '%) — ' + esc(s.note) + '</li>'; });
+        h += '<p class="font-display text-lg text-foreground">Примеры вопросов для аудита</p>';
+        h += '<ol class="mt-3 space-y-2 text-sm">';
+        r.questions.forEach(function (q, i) {
+          h += '<li class="flex gap-3"><span class="font-mono text-xs text-faint tabular-nums mt-0.5">' + (i < 9 ? '0' : '') + (i + 1) + '</span><span><span class="text-foreground">«' + esc(q.q) + '»</span><span class="block text-xs text-faint">' + esc(q.tag) + '</span></span></li>';
+        });
+        h += '</ol>';
+        h += '<p class="mt-5 font-display text-lg text-foreground">Что измерит AI-аудит</p><ul class="mt-2 space-y-1.5 text-sm text-muted">';
+        r.measures.forEach(function (m) { h += '<li class="flex gap-2.5"><span class="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary"></span><span>' + esc(m) + '</span></li>'; });
         h += '</ul>';
-        if (r.priorityQueries && r.priorityQueries.length) h += '<p class="mt-3">Контрольные запросы: ' + r.priorityQueries.map(esc).join('; ') + '</p>';
-        h += '<p class="mt-3 text-xs text-muted">' + esc(r.disclaimer) + '</p>';
-        h += '<p class="mt-3"><a class="text-primary hover:underline" href="/#lead">Заказать AI-аудит →</a></p>';
-        var out = box(form, ''); out.innerHTML = h;
-        var ring = out.querySelector('[data-ring]');
-        if (ring) requestAnimationFrame(function () { requestAnimationFrame(function () { ring.setAttribute('stroke-dashoffset', (C - sc / 100 * C).toFixed(2)); }); });
+        h += '<p class="mt-4 text-xs leading-relaxed text-faint">' + esc(r.disclaimer) + '</p>';
+        h += '<div class="mt-5 flex flex-col gap-3 sm:flex-row">' +
+          '<a href="/?plan=audit#lead" data-plan="audit" data-scan-order class="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-6 text-sm font-medium text-primary-fg hover:brightness-110">Заказать аудит</a>' +
+          '<a href="' + TG + '" target="_blank" rel="noopener" class="inline-flex h-12 items-center justify-center rounded-lg px-6 text-sm font-medium text-foreground shadow-[0_0_0_1px_rgb(255_255_255/0.16)] hover:shadow-[0_0_0_1px_rgb(255_255_255/0.32)]">Обсудить в Telegram</a></div>';
+        var out = document.querySelector('[data-scan-out]') || box(form, '');
+        out.innerHTML = h;
+        var order = out.querySelector('[data-scan-order]');
+        if (order) order.addEventListener('click', function (ev) {
+          if (!document.getElementById('lead')) return;
+          ev.preventDefault(); ev.stopPropagation();
+          goLead('audit', { site: d.site || '', company: d.brand || '', task: d.service ? ('Аудит: ' + d.service + (d.city ? ', ' + d.city : '')) : '' });
+        });
+        if (out.getAttribute('data-scan-out') !== null && window.innerWidth < 1024) out.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
   }
+
   function onLead(form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var d = data(form);
-      if (!d.plan) { var m = /[?&]plan=([^&]+)/.exec(location.hash); if (m) d.plan = decodeURIComponent(m[1]); }
-      if (!window.__seltikaSiteLead) { box(form, 'text-red-400').textContent = 'Напишите на hello@seltikastudio.ru или позвоните +7 903 343-40-07.'; return; }
+      if (!('plan' in d)) { var p = planFromUrl(); if (p) d.plan = p; }
+      delete d.consent;
+      if (!window.__seltikaSiteLead) { box(form, 'text-red-400').textContent = 'Напишите в Telegram t.me/seltikastudiobot или позвоните +7 903 343-40-07.'; return; }
       busy(form, true, 'Отправляем…');
       window.__seltikaSiteLead(d).then(function (res) {
         busy(form, false);
         if (res && res.ok) {
           form.innerHTML = '<p class="font-display text-xl" tabindex="-1">Заявка принята</p>' +
             '<p class="mt-3 text-sm leading-relaxed text-muted">Ответим в течение рабочего дня: уточним задачу и предложим, с чего начать — аудит, настройку или продвижение.</p>' +
-            '<p class="mt-4 text-sm"><a class="text-primary hover:underline" href="tel:+79033434007">+7 903 343-40-07</a> · <a class="text-primary hover:underline" href="mailto:hello@seltikastudio.ru">hello@seltikastudio.ru</a></p>';
+            '<p class="mt-3 text-sm leading-relaxed text-muted">Быстрее всего — в Telegram: бот пришлёт опросный лист, по нему посчитаем смету. Можно и в WhatsApp или по телефону.</p>' +
+            '<p class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm"><a class="text-primary hover:underline" href="' + TG + '" target="_blank" rel="noopener">Telegram: @seltikastudiobot</a><a class="text-primary hover:underline" href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a><a class="text-primary hover:underline" href="tel:+79033434007">+7 903 343-40-07</a></p>';
           var p = form.querySelector('p'); if (p) p.focus();
         } else {
           box(form, 'text-red-400').textContent = (res && res.error) || 'Не удалось отправить.';
@@ -164,8 +221,29 @@
       if (f.querySelector('#scan-site,[name="service"]') && !f.querySelector('[name="contact"]')) onScan(f);
       else if (f.querySelector('[name="contact"]')) onLead(f);
     });
+    initPlans();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+/* Cookie notice: the site uses Yandex Metrica (with Webvisor). Shown once; dismissal kept in localStorage. */
+(function () {
+  var KEY = 'ss-cookie-notice-2026-10';
+  function show() {
+    try { if (localStorage.getItem(KEY)) return; } catch (e) {}
+    if (document.getElementById('cookie-notice')) return;
+    var el = document.createElement('div');
+    el.id = 'cookie-notice';
+    el.setAttribute('role', 'region');
+    el.setAttribute('aria-label', 'Cookies');
+    el.innerHTML = '<p>Сайт использует cookies и Яндекс Метрику с Вебвизором: считаем посещения и смотрим, как пользуются страницами. Имя и контакт из формы Метрика не записывает. <a href="/privacy/">Подробнее</a></p><button type="button">Понятно</button>';
+    el.querySelector('button').addEventListener('click', function () {
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      el.parentNode && el.parentNode.removeChild(el);
+    });
+    document.body.appendChild(el);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show); else show();
 })();
 
 /* Motion without React: scroll reveal, sticky header state + progress bar, hero engine switcher with typing demo,
@@ -249,14 +327,15 @@
     update();
   }
 
+  // Hero demo: example questions and how a system builds an answer. These are OUR explanations, not quotes of model answers.
   var DEMOS = [
-    { id: 'chatgpt', name: 'ChatGPT', query: 'Какой отель выбрать в Казани на выходные?', answer: 'В Казани называют отели с понятным профилем: район, для кого, какие факты на сайте и в справочниках совпадают.' },
-    { id: 'alice', name: 'Алиса', query: 'Где остановиться в Казани в центре?', answer: 'Назову места с согласованным именем, адресом и описанием. Если в справочниках одно, а на сайте другое — имя часто не звучит.' },
-    { id: 'perplexity', name: 'Perplexity', query: 'Best hotels in Kazan for a weekend', answer: 'Perplexity собирает ответ со страниц, которые прямо отвечают на вопрос и на которые можно сослаться.' },
-    { id: 'gigachat', name: 'GigaChat', query: 'Какой отель в Казани выбрать для поездки?', answer: 'Нужны согласованные описание, город и факты в русскоязычных источниках.' },
-    { id: 'gemini', name: 'Gemini', query: 'Where to stay in Kazan city center?', answer: 'Gemini опирается на страницы, которые можно процитировать. Если фактов нет в HTML, компании в ответе не будет.' },
-    { id: 'grok', name: 'Grok', query: 'Which hotel in Kazan is worth booking?', answer: 'Назову те, у кого на сайте ясны район, сервис и подтверждения. Общие слоганы без фактов в ответ почти не попадают.' },
-    { id: 'claude', name: 'Claude', query: 'Which studio in Russia helps brands appear in AI answers?', answer: 'SELTIKA STUDIO in Kazan works on site structure, facts and external sources so seven AI systems can name a company in an answer.' }
+    { id: 'chatgpt', name: 'ChatGPT', query: 'Кто внедряет 1С в Казани? Посоветуй 3–5 компаний', answer: 'Пример, не ответ модели: ChatGPT называет компании, у которых на сайте прямо сказано, что они делают, где и для кого, и это совпадает с отзывами и каталогами.' },
+    { id: 'alice', name: 'Алиса', query: 'Какую компанию выбрать для внедрения 1С в Казани?', answer: 'Пример, не ответ модели: Алисе нужны одинаковые имя, город и описание на сайте и в справочниках. Если они расходятся, компанию часто не называют.' },
+    { id: 'perplexity', name: 'Perplexity', query: 'Best 1C integrators in Kazan', answer: 'Пример, не ответ модели: Perplexity собирает ответ со страниц, которые прямо отвечают на вопрос, и показывает их как источники.' },
+    { id: 'gigachat', name: 'GigaChat', query: 'Кто в Казани внедряет 1С для производства?', answer: 'Пример, не ответ модели: GigaChat опирается на русскоязычные источники, поэтому важны согласованные описание, город и факты о компании.' },
+    { id: 'gemini', name: 'Gemini', query: 'Which companies implement 1C in Kazan?', answer: 'Пример, не ответ модели: Gemini берёт то, что можно процитировать. Если фактов нет в тексте страницы, компании в ответе не будет.' },
+    { id: 'grok', name: 'Grok', query: 'Who is a reliable 1C partner in Kazan?', answer: 'Пример, не ответ модели: без фактов на сайте — услуги, отрасли, подтверждения — слоганы почти не попадают в ответ.' },
+    { id: 'claude', name: 'Claude', query: 'Как выбрать подрядчика по внедрению 1С в Казани?', answer: 'Пример, не ответ модели: Claude чаще советует критерии выбора и называет компании, которые эти критерии явно закрывают на своих страницах.' }
   ];
   var ACTIVE = 'shadow-[0_0_0_1px_rgb(34_184_255/0.7)]';
   var IDLE = ['shadow-[0_0_0_1px_rgb(255_255_255/0.12)]', 'hover:shadow-[0_0_0_1px_rgb(255_255_255/0.24)]'];
@@ -284,7 +363,7 @@
       timer = setInterval(function () { i++; typed.textContent = text.slice(0, i); if (i >= text.length) clearInterval(timer); }, 28);
     }
     function show(d) {
-      if (nameEl) nameEl.textContent = d.name;
+      if (nameEl) nameEl.textContent = 'Пример вопроса · ' + d.name;
       if (answerEl) {
         answerEl.textContent = d.answer;
         if (!reduce && answerEl.animate) answerEl.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 360, easing: 'cubic-bezier(0.22,1,0.36,1)' });

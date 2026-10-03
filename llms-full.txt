@@ -4,6 +4,9 @@
 Телефон: +7 903 343-40-07
 Почта: hello@seltikastudio.ru
 Telegram: https://t.me/seltikastudiobot
+WhatsApp: https://wa.me/79033434007
+Telegram-канал: https://t.me/seltikastudio
+Оплата: безналичным переводом с НДС, закрывающие документы.
 Анкета: https://seltikastudio.ru/SELTIKA-STUDIO-oprosnyi-list.pdf
 Город: Казань, Россия
 Языки: русский (основной), английский (международный контур)
@@ -83,17 +86,17 @@ SaaS, которые модели склеивают с лидером кате�
 ## Страницы
 
 https://seltikastudio.ru/
-https://seltikastudio.ru/geo
-https://seltikastudio.ru/aeo
-https://seltikastudio.ru/ai-visibility
-https://seltikastudio.ru/studio
-https://seltikastudio.ru/faq
-https://seltikastudio.ru/geo-b2b
-https://seltikastudio.ru/aeo-saas
-https://seltikastudio.ru/ecommerce
-https://seltikastudio.ru/local
-https://seltikastudio.ru/chatgpt
-https://seltikastudio.ru/alice
+https://seltikastudio.ru/geo/
+https://seltikastudio.ru/aeo/
+https://seltikastudio.ru/ai-visibility/
+https://seltikastudio.ru/studio/
+https://seltikastudio.ru/faq/
+https://seltikastudio.ru/geo-b2b/
+https://seltikastudio.ru/aeo-saas/
+https://seltikastudio.ru/ecommerce/
+https://seltikastudio.ru/local/
+https://seltikastudio.ru/chatgpt/
+https://seltikastudio.ru/alice/
 https://seltikastudio.ru/#scanner
 https://seltikastudio.ru/#lead
 

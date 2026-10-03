@@ -1,24 +1,15 @@
-/* GitHub Pages has no TanStack /_serverFn. Scanner is a local hypothesis.
+/* GitHub Pages has no TanStack /_serverFn. The free check shows example questions only (no scores).
    Leads POST to n8n. React calls window.__seltikaSiteScan / __seltikaSiteLead. */
 (function () {
   var SITE_HOOK = "https://n8n.gobots.ru/webhook/seltikastudio-site";
   var SCAN = "a42b99520690860484df897cc18989b725481172a67d99bb3aa94ce95a1773b3";
   var LEAD = "5ddea7d37b2ed55e2ade42f3fd84861d5eca3e7dfd4347c7470cc5bf64b4b3d8";
 
-  function hashStr(s) {
-    var h = 2166136261;
-    s = String(s || "");
-    for (var i = 0; i < s.length; i++) {
-      h ^= s.charCodeAt(i);
-      h = Math.imul(h, 16777619);
-    }
-    return h >>> 0;
-  }
-
   function planFromHash() {
     try {
       var q = new URLSearchParams(window.location.hash.split("?")[1] || "");
-      return q.get("plan") || "audit";
+      var s = new URLSearchParams(window.location.search || "");
+      return q.get("plan") || s.get("plan") || "audit";
     } catch (e) {
       return "audit";
     }
@@ -33,60 +24,42 @@
     }
   }
 
-  function scanHypothesis(data) {
+  /* Free preview: example questions by template + what the paid audit measures.
+     No scores, no percentages, no calls to models. */
+  function questionPreview(data) {
     var site = String(data.site || "").trim();
-    var brand = String(data.brand || "").trim() || hostnameOf(site);
-    var service = String(data.service || "").trim();
-    var seed = hashStr(brand + "|" + site + "|" + service);
-    var score = 28 + (seed % 45);
-    var verdict = "weak";
-    if (score >= 62) verdict = "visible";
-    else if (score >= 44) verdict = "emerging";
-
-    function sys(id, name, bias) {
-      var likelihood = Math.max(8, Math.min(88, score + bias));
-      var status = "unlikely";
-      if (likelihood >= 64) status = "likely";
-      else if (likelihood >= 38) status = "possible";
-      var note = status === "likely" ? "Есть шанс попасть в ответ" : status === "possible" ? "Зависит от формулировки вопроса" : "Пока слабые сигналы";
-      return { id: id, name: name, status: status, likelihood: likelihood, note: note };
+    var brand = String(data.brand || "").trim() || (site ? hostnameOf(site) : "");
+    var service = String(data.service || "").trim().replace(/[«»"]/g, "");
+    var city = String(data.city || "").trim();
+    var loc = city ? (/^(в|во|на)\s/i.test(city) ? " " + city : " (" + city + ")") : "";
+    var q = [];
+    var LIST = "подборки «лучшие/топ»: на какие рейтинги опирается ответ";
+    var REC = "кого советуют вместо вас";
+    var DESC = "описывают ли вас верно";
+    q.push({ q: "Лучшие компании: " + service + loc + " — кого выбрать?", tag: LIST });
+    q.push({ q: "Топ-5 компаний: " + service + loc, tag: LIST });
+    q.push({ q: "Рейтинг: " + service + loc + ". Кому можно доверять?", tag: LIST });
+    q.push({ q: "Посоветуй надёжную компанию: " + service + loc, tag: REC });
+    q.push({ q: "К кому обратиться: " + service + loc + "? Нужны 3–5 вариантов", tag: REC });
+    q.push({ q: service.charAt(0).toUpperCase() + service.slice(1) + loc + ": какие есть варианты и чем они отличаются?", tag: REC });
+    q.push({ q: "Сколько стоят услуги: " + service + loc + "? От чего зависит цена?", tag: "кого называют, когда спрашивают про цену" });
+    q.push({ q: "Как выбрать компанию: " + service + "? На что смотреть, чтобы не ошибиться", tag: "чьи критерии и примеры попадают в ответ" });
+    if (brand) {
+      q.push({ q: "Что известно о компании " + brand + "? Чем она занимается?", tag: DESC });
+      q.push({ q: brand + " или другие: кого выбрать для задачи «" + service + "»?", tag: DESC + " и с кем сравнивают" });
+    } else {
+      q.push({ q: "Кто специализируется на этом: " + service + loc + "?", tag: REC });
     }
-
-    var queries = [];
-    if (service) queries.push(service + " кого выбрать");
-    if (brand) queries.push(brand + " отзывы");
-    queries.push((service || "подрядчик") + " надёжная компания");
-
-    var competitors = [];
-    if (score < 55) {
-      competitors.push({
-        name: "Более известные игроки ниши",
-        why: "модели чаще опираются на уже цитируемые бренды",
-      });
-    }
-
     return {
-      verdict: verdict,
-      score: score,
-      summary:
-        "Предварительная гипотеза по открытым сигналам для «" +
-        (brand || "бренда") +
-        "». Это не живой краулинг моделей. Полный срез живых ответов — в AI-аудите: 7 систем, по 3 прогона на вопрос.",
-      systems: [
-        sys("chatgpt", "ChatGPT", 6),
-        sys("alice", "Алиса", -12),
-        sys("perplexity", "Perplexity", 2),
-        sys("gigachat", "GigaChat", -18),
-        sys("gemini", "Gemini", 8),
-        sys("grok", "Grok", 4),
-        sys("claude", "Claude", 3),
+      questions: q,
+      measures: [
+        "10 вопросов × 7 систем × 3 прогона, каждый прогон в новом диалоге: ChatGPT, Алиса, Perplexity, GigaChat, Gemini, Grok, Claude",
+        "Подборки «лучшие/топ»: на какие рейтинги и каталоги опираются ответы и есть ли вы в них",
+        "До 3 конкурентов, которых нейросети называют вместо вас",
+        "Тип проблемы по каждому вопросу: не упоминают / описывают неверно / советуют конкурентов / нет доступа ботов",
+        "Отчёт и план следующих шагов"
       ],
-      priorityQueries: queries.slice(0, 4),
-      competitors: competitors,
-      topics: service ? [service] : [],
-      pagesToStrengthen: ["Главная", "Услуги", "FAQ"],
-      nextSteps: ["Согласовать контрольные запросы", "Проверить ответы вручную"],
-      disclaimer: "Гипотеза по сайту и формулировкам, не отчёт по живым ответам моделей.",
+      disclaimer: "Это примеры по шаблону, а не ответы нейросетей: в модели ничего не отправляли и оценок не ставим. В аудите вопросы берём из анкеты — так, как их задают ваши клиенты."
     };
   }
 
@@ -120,23 +93,10 @@
 
   window.__seltikaSiteScan = function (data) {
     data = data || {};
-    var site = String(data.site || "").trim();
-    var brand = String(data.brand || "").trim();
-    if (!site && !brand) {
-      return Promise.resolve({ ok: false, error: "Укажите сайт или название бренда. Если сайта нет — достаточно бренда и услуги." });
+    if (!String(data.service || "").trim()) {
+      return Promise.resolve({ ok: false, error: "Укажите услугу или нишу — например, «внедрение 1С» или «стоматология»." });
     }
-    var result = scanHypothesis(data);
-    if (!site && brand) {
-      result.score = Math.max(12, result.score - 14);
-      result.verdict = result.score >= 44 ? "emerging" : "weak";
-      result.summary =
-        "Сайта нет — это гипотеза по имени «" + brand +
-        "». Без своей страницы нейросетям нечего цитировать. Следующий шаг — одностраничник: кто вы, что продаёте, где работаете.";
-      result.nextSteps = ["Собрать одностраничник под бренд", "Согласовать контрольные запросы", "Проверить ответы вручную"];
-      result.pagesToStrengthen = ["Одностраничник", "Профиль компании"];
-      result.disclaimer = "Без сайта оценка слабее. Это не отчёт по живым ответам моделей.";
-    }
-    return Promise.resolve({ ok: true, result: result });
+    return Promise.resolve({ ok: true, result: questionPreview(data) });
   };
 
   window.__seltikaSiteLead = function (data) {
@@ -154,15 +114,15 @@
         contact: data.contact || "",
         task: data.task || "",
         niche: data.task || "",
-        package: data.plan || planFromHash(),
+        package: ("plan" in data) ? String(data.plan || "") : planFromHash(),
       }),
     })
       .then(function (r) {
         if (r.ok) return { ok: true };
-        return { ok: false, error: "Не удалось отправить. Напишите на hello@seltikastudio.ru, в Telegram @seltikastudiobot или позвоните +7 903 343-40-07." };
+        return { ok: false, error: "Не удалось отправить. Напишите в Telegram @seltikastudiobot, в WhatsApp +7 903 343-40-07 или позвоните." };
       })
       .catch(function () {
-        return { ok: false, error: "Не удалось отправить. Напишите на hello@seltikastudio.ru, в Telegram @seltikastudiobot или позвоните +7 903 343-40-07." };
+        return { ok: false, error: "Не удалось отправить. Напишите в Telegram @seltikastudiobot, в WhatsApp +7 903 343-40-07 или позвоните." };
       });
   };
 
@@ -176,7 +136,7 @@
       path.indexOf(LEAD) !== -1 ||
       (data && (data.contact || data.name) && data.site !== undefined);
     var isScan = path.indexOf(SCAN) !== -1 || (data && (data.site || data.brand || data.service) && !isLead);
-    if (isScan) return Promise.resolve(jsonOk({ ok: true, result: scanHypothesis(data) }));
+    if (isScan) return Promise.resolve(jsonOk({ ok: true, result: questionPreview(data) }));
     if (isLead) {
       return window.__seltikaSiteLead(data).then(function (res) {
         return jsonOk(res);

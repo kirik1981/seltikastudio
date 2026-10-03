@@ -1,0 +1,15 @@
+{
+  "name": "SELTIKA STUDIO",
+  "short_name": "SELTIKA",
+  "description": "Продвижение в нейросетях: GEO/AEO-студия в Казани",
+  "lang": "ru",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#070a0f",
+  "theme_color": "#070a0f",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/__grok/icon-180.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

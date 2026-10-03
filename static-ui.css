@@ -16,3 +16,29 @@ section.hero-spot ul button{cursor:pointer;-webkit-tap-highlight-color:transpare
 [data-typed]{white-space:pre-wrap}
 /* one-shot build animations (search rows, bars) start when scrolled into view, not at page load off-screen */
 html.js .serp-row:not(.seltika-play),html.js .bar-fill:not(.seltika-play){-webkit-animation-play-state:paused!important;animation-play-state:paused!important}
+
+/* v4 (2026-10-03): header at >=1440 — nav no longer touches phone/Telegram ("GEO/AEO РФ+7 903…") */
+@media (min-width:1024px){header nav[aria-label="Основное"]{margin-inline:1.25rem;min-width:0}}
+@media (min-width:1440px){
+  header nav[aria-label="Основное"]{gap:1.25rem}
+  header .lg\:flex.items-center.gap-5{gap:1rem}
+}
+/* contrast: small grey text >= 4.5:1 on background and cards (was #5c6878 ≈ 3.4:1) */
+:root{--color-faint:#808c9c}
+.paper-band .text-faint{color:#0c1016c2!important}
+/* lead form: package select + consent */
+select.lead-select{-webkit-appearance:none;appearance:none;padding-right:2.25rem;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238c98a8' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center}
+select.lead-select:focus{outline:none;box-shadow:0 0 0 1px rgb(34 184 255/.7)}
+select.lead-select option{background:#101722;color:#f2f5f7}
+.lead-consent{display:flex;align-items:flex-start;gap:.6rem;cursor:pointer}
+.lead-consent input{width:1rem;height:1rem;margin-top:.15rem;flex-shrink:0;accent-color:#22b8ff}
+/* cookie notice */
+#cookie-notice{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:60;max-width:36rem;margin-inline:auto;display:flex;gap:.9rem;align-items:center;
+  padding:.85rem 1rem;border-radius:.75rem;background:#101722f2;box-shadow:0 0 0 1px rgb(255 255 255/.14),0 10px 30px rgb(0 0 0/.45);
+  color:#c3ccd6;font-size:.8rem;line-height:1.45;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#cookie-notice p{margin:0}
+#cookie-notice a{color:#22b8ff;text-decoration:underline}
+#cookie-notice button{flex-shrink:0;height:2.25rem;padding:0 1rem;border-radius:.5rem;background:#22b8ff;color:#041018;font-weight:500;cursor:pointer}
+@media print{#cookie-notice{display:none}}

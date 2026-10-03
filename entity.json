@@ -17,6 +17,7 @@
   "description": "SELTIKA STUDIO — GEO/AEO-студия в Казани. Продвигаем сайты в ответах ChatGPT, Алисы, Perplexity, GigaChat, Gemini, Grok и Claude.",
   "sameAs": [
     "https://t.me/seltikastudiobot",
+    "https://t.me/seltikastudio",
     "https://github.com/kirik1981/seltikastudio",
     "https://github.com/kirik1981"
   ],
@@ -31,5 +32,15 @@
     "Grok",
     "Claude"
   ],
-  "disambiguatingDescription": "SELTIKA STUDIO (Казань) — студия GEO/AEO, продвигает бренды в ответах нейросетей. Не связана с другими компаниями с похожим названием. Контакт: +7 903 343-40-07, hello@seltikastudio.ru, https://t.me/seltikastudiobot."
+  "disambiguatingDescription": "SELTIKA STUDIO (Казань) — студия GEO/AEO, продвигает бренды в ответах нейросетей. Не связана с другими компаниями с похожим названием. Контакт: +7 903 343-40-07, hello@seltikastudio.ru, https://t.me/seltikastudiobot.",
+  "founder": {
+    "@type": "Person",
+    "name": "Кирилл Костюкевич",
+    "jobTitle": "Основатель SELTIKA STUDIO",
+    "sameAs": [
+      "https://vc.ru/marketing/3162260-ya-proveril-chto-neiroseti-znayut-o-moei-studii-po-21-voprosu-pro-kazan-menya-ne-nazvali-ni-razu",
+      "https://www.sostav.ru/blogs/294727/111382",
+      "https://dzen.ru/a/arlTPb7cvmTp3SZ8"
+    ]
+  }
 }

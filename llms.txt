@@ -7,6 +7,9 @@ SELTIKA STUDIO (Seltika Studio, Селтика Студио) — студия GE
 Телефон: +7 903 343-40-07
 Почта: hello@seltikastudio.ru
 Telegram: https://t.me/seltikastudiobot
+WhatsApp: https://wa.me/79033434007
+Telegram-канал: https://t.me/seltikastudio
+Оплата: безналичным переводом с НДС, закрывающие документы.
 Анкета: https://seltikastudio.ru/SELTIKA-STUDIO-oprosnyi-list.pdf
 Языки: русский, английский.
 
@@ -71,8 +74,8 @@ B2B, отели, локальный бизнес, SaaS и магазины в Р
 - [AEO](https://seltikastudio.ru/aeo/)
 - [AI-видимость](https://seltikastudio.ru/ai-visibility/)
 - [GEO-агентство в России](https://seltikastudio.ru/geo-aeo-agentstvo-rossiya/)
-- [Студия](https://seltikastudio.ru/studio)
-- [Вопросы](https://seltikastudio.ru/faq)
+- [Студия](https://seltikastudio.ru/studio/)
+- [Вопросы](https://seltikastudio.ru/faq/)
 - [Продвижение в нейросетях](https://seltikastudio.ru/prodvizhenie-v-neyrosetyah/)
 - [B2B](https://seltikastudio.ru/geo-b2b/)
 - [SaaS](https://seltikastudio.ru/aeo-saas/)
@@ -80,6 +83,7 @@ B2B, отели, локальный бизнес, SaaS и магазины в Р
 - [Локальный бизнес](https://seltikastudio.ru/local/)
 - [ChatGPT](https://seltikastudio.ru/chatgpt/)
 - [Алиса](https://seltikastudio.ru/alice/)
+- [AI-радар](https://seltikastudio.ru/radar/)
 - [Источники](https://seltikastudio.ru/sources/)
 - [Полный профиль](https://seltikastudio.ru/llms-full.txt)
 
@@ -91,10 +95,15 @@ B2B, отели, локальный бизнес, SaaS и магазины в Р
 - Чем Seltika Studio не является (не склад, не кибербез, не игры)?
 - Сколько нейросетей сканирует SELTIKA STUDIO? Семь: ChatGPT, Алиса, Perplexity, GigaChat, Gemini, Grok и Claude.
 
+## Кто ведёт проект
+
+Кирилл Костюкевич — основатель SELTIKA STUDIO. Много работает с нейросетями; увидел, что GEO/AEO будет расти, и открыл студию, чтобы объяснять бизнесу, как это работает. Старт с 0 из 21 на собственном сайте — открытая точка отсчёта.
+Статьи: https://vc.ru/marketing/3162260-ya-proveril-chto-neiroseti-znayut-o-moei-studii-po-21-voprosu-pro-kazan-menya-ne-nazvali-ni-razu · https://www.sostav.ru/blogs/294727/111382 · https://dzen.ru/a/arlTPb7cvmTp3SZ8
+
 ## Наш кейс
 
-Клиентских кейсов не публикуем и не придумываем. Открытый кейс — этот сайт: 23.09.2026 по вопросам «кто в Казани…» студию не назвала ни одна из 7 систем (0 из 21), 27.09.2026 — 1 из 21 (Perplexity). Статья: https://vc.ru/marketing/3162260-ya-proveril-chto-neiroseti-znayut-o-moei-studii-po-21-voprosu-pro-kazan-menya-ne-nazvali-ni-razu
+Клиентских кейсов не публикуем и не придумываем. Открытый кейс — этот сайт: 23.09.2026 по вопросам «кто в Казани…» студию не назвала ни одна из 7 систем (0 из 21), 27.09.2026 — 1 из 21 (Perplexity). 21 = 3 вопроса × 7 систем, по одному прогону. Статья: https://vc.ru/marketing/3162260-ya-proveril-chto-neiroseti-znayut-o-moei-studii-po-21-voprosu-pro-kazan-menya-ne-nazvali-ni-razu
 
 ## Как начать
-Напишите в Telegram https://t.me/seltikastudiobot — бот пришлёт опросный лист.
+Напишите в Telegram https://t.me/seltikastudiobot — бот пришлёт опросный лист. Или WhatsApp https://wa.me/79033434007, телефон +7 903 343-40-07, форма https://seltikastudio.ru/#lead.
 Пустой лист: https://seltikastudio.ru/SELTIKA-STUDIO-oprosnyi-list.pdf
