@@ -1,6 +1,8 @@
 # SELTIKA STUDIO — AI retrieval is intended.
 # Citation profile: https://seltikastudio.ru/llms.txt
 # Full profile: https://seltikastudio.ru/llms-full.txt
+# Search ≠ training. OAI-SearchBot / PerplexityBot / Claude-SearchBot = index for answers.
+# GPTBot / ClaudeBot / Google-Extended = training. Blocking GPTBot does not block ChatGPT Search.
 
 User-agent: *
 Allow: /
@@ -92,6 +94,19 @@ Allow: /
 User-agent: YandexNews
 Allow: /
 
+User-agent: GrokBot
+Allow: /
+
+User-agent: xAI-Bot
+Allow: /
+
+User-agent: CopilotBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
 Sitemap: https://seltikastudio.ru/sitemap.xml
 Host: https://seltikastudio.ru
 # llms-txt: https://seltikastudio.ru/llms.txt
+# IndexNow: https://seltikastudio.ru/1558e3c9381e4ac7993c6a62bd533b8f.txt

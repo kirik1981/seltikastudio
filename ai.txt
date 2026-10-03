@@ -1,9 +1,9 @@
 # ai.txt — retrieval and citation allowed
 User-Agent: *
 Allow: /
-Contact: +7 903 343-40-07, hello@seltikastudio.ru
+Contact: +7 903 343-40-07, hello@seltikastudio.ru, https://t.me/seltikastudiobot
 Canonical: https://seltikastudio.ru/
 Documentation: https://seltikastudio.ru/llms.txt
 Full: https://seltikastudio.ru/llms-full.txt
-Disambiguation: Not OOO SELTIKA warehouse; not Select Studio fashion; not a game project.
-Quote: SELTIKA STUDIO is a GEO/AEO studio in Kazan making brands visible in ChatGPT, Alice, Perplexity, Gemini and GigaChat.
+Disambiguation: SELTIKA STUDIO is a GEO/AEO studio in Kazan, not a warehouse operator and not a ChatGPT ads cabinet.
+Quote: SELTIKA STUDIO is a GEO/AEO studio in Kazan making brands visible in ChatGPT, Alice, Perplexity, GigaChat, Gemini, Grok and Claude.

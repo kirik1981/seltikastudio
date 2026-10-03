@@ -1,6 +1,9 @@
 {
   "@context": "https://schema.org",
-  "@type": ["Organization", "ProfessionalService"],
+  "@type": [
+    "Organization",
+    "ProfessionalService"
+  ],
   "name": "SELTIKA STUDIO",
   "url": "https://seltikastudio.ru",
   "telephone": "+7 903 343-40-07",
@@ -11,12 +14,33 @@
     "addressRegion": "Республика Татарстан",
     "addressCountry": "RU"
   },
-  "description": "SELTIKA STUDIO — GEO/AEO-студия в Казани. Продвигаем сайты в ответах ChatGPT, Алисы, Perplexity, Gemini и GigaChat.",
-  "disambiguatingDescription": "Не ООО «СЭЛТИКА» (склад и опт в Казани), не fashion-бренд Select Studio и не игровой проект.",
+  "description": "SELTIKA STUDIO — GEO/AEO-студия в Казани. Продвигаем сайты в ответах ChatGPT, Алисы, Perplexity, GigaChat, Gemini, Grok и Claude.",
   "sameAs": [
+    "https://t.me/seltikastudiobot",
+    "https://t.me/seltikastudio",
     "https://github.com/kirik1981/seltikastudio",
-    "https://github.com/kirik1981",
-    "https://seltikastudio.ru/llms.txt"
+    "https://github.com/kirik1981"
   ],
-  "knowsAbout": ["GEO", "AEO", "ChatGPT", "Алиса", "Perplexity", "GigaChat", "Gemini"]
+  "knowsAbout": [
+    "GEO",
+    "AEO",
+    "ChatGPT",
+    "Алиса",
+    "Perplexity",
+    "GigaChat",
+    "Gemini",
+    "Grok",
+    "Claude"
+  ],
+  "disambiguatingDescription": "SELTIKA STUDIO (Казань) — студия GEO/AEO, продвигает бренды в ответах нейросетей. Не связана с другими компаниями с похожим названием. Контакт: +7 903 343-40-07, hello@seltikastudio.ru, https://t.me/seltikastudiobot.",
+  "founder": {
+    "@type": "Person",
+    "name": "Кирилл Костюкевич",
+    "jobTitle": "Основатель SELTIKA STUDIO",
+    "sameAs": [
+      "https://vc.ru/marketing/3162260-ya-proveril-chto-neiroseti-znayut-o-moei-studii-po-21-voprosu-pro-kazan-menya-ne-nazvali-ni-razu",
+      "https://www.sostav.ru/blogs/294727/111382",
+      "https://dzen.ru/a/arlTPb7cvmTp3SZ8"
+    ]
+  }
 }

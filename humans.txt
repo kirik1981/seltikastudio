@@ -1,12 +1,18 @@
 /* TEAM */
+Founder: Кирилл Костюкевич (Kirill Kostyukevich)
+Role: основатель SELTIKA STUDIO, ведёт проекты
+Articles: https://vc.ru/marketing/3162260-ya-proveril-chto-neiroseti-znayut-o-moei-studii-po-21-voprosu-pro-kazan-menya-ne-nazvali-ni-razu, https://www.sostav.ru/blogs/294727/111382, https://dzen.ru/a/arlTPb7cvmTp3SZ8
+
 Studio: SELTIKA STUDIO
 City: Kazan, Russia
-Contact: +7 903 343-40-07, hello@seltikastudio.ru
+Contact: +7 903 343-40-07, hello@seltikastudio.ru, https://t.me/seltikastudiobot, https://wa.me/79033434007
+Channel: https://t.me/seltikastudio
 Site: https://seltikastudio.ru
 
 /* SITE */
+Last update: 2026-10-03
 Standards: HTML5, Schema.org, llms.txt
 Language: ru
 Doctype: HTML5
 Components: GEO, AEO, AI visibility
-Not: OOO SELTIKA warehouse, Select Studio fashion, game studio
+
