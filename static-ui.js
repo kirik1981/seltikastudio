@@ -255,7 +255,7 @@
   var reduce = !!(mq && mq.matches);
   var hasIO = 'IntersectionObserver' in window;
   // Tell form-bridge.js not to force-show every .reveal on a timer: scroll reveal is handled here.
-  if (hasIO) window.__seltikaRevealIO = true; /* 2026-10-18: и при reduced-motion — там мягкое появление прозрачностью (CSS в form-bridge.js) */
+  if (hasIO) window.__seltikaRevealIO = true; /* 2026-10-18: и при reduced-motion — только появление прозрачностью (CSS в form-bridge.js), без движения */
 
   function on(el, instant) {
     if (el.getAttribute('data-seltika-on') === '1') return;
@@ -414,7 +414,7 @@
     var els = [].slice.call(document.querySelectorAll('.serp-row, .bar-fill'));
     if (!els.length) return;
     var play = function (el) { el.classList.add('seltika-play'); };
-    if (!hasIO) { els.forEach(play); return; }
+    if (reduce || !hasIO) { els.forEach(play); return; }
     els.forEach(function (el, i) {
       var sib = el.parentNode ? [].indexOf.call(el.parentNode.children, el) : i;
       if (!el.style.animationDelay) el.style.animationDelay = Math.min(sib * 110, 660) + 'ms';
@@ -440,9 +440,9 @@
    Показывает: reduced-motion, UA/версию iOS, сколько анимаций запущено, ошибки JS. Обычным посетителям не видно. */
 (function () {
   var on = /[?&#]motion-debug/.test(location.search + location.hash);
+  if (!on) return;
   var errs = [];
   window.addEventListener('error', function (e) { errs.push((e.message || 'error') + ' @' + (e.filename || '').split('/').pop() + ':' + (e.lineno || '')); });
-  if (!on) return;
   function render() {
     var mm = function (q) { try { return window.matchMedia(q).matches; } catch (e) { return '?'; } };
     var an = document.getAnimations ? document.getAnimations() : null;
