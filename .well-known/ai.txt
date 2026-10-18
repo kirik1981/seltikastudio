@@ -6,4 +6,4 @@ Canonical: https://seltikastudio.ru/
 Documentation: https://seltikastudio.ru/llms.txt
 Full: https://seltikastudio.ru/llms-full.txt
 Disambiguation: SELTIKA STUDIO is a GEO/AEO studio in Kazan, not a warehouse operator and not a ChatGPT ads cabinet.
-Quote: SELTIKA STUDIO is a GEO/AEO studio in Kazan making brands visible in ChatGPT, Alice, Perplexity, GigaChat, Gemini, Grok and Claude.
+Quote: SELTIKA STUDIO is a GEO/AEO studio in Kazan making brands visible in ChatGPT, Alice, Perplexity, GigaChat, Gemini, Grok, Claude and DeepSeek.

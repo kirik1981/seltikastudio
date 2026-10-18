@@ -255,7 +255,7 @@
   var reduce = !!(mq && mq.matches);
   var hasIO = 'IntersectionObserver' in window;
   // Tell form-bridge.js not to force-show every .reveal on a timer: scroll reveal is handled here.
-  if (hasIO && !reduce) window.__seltikaRevealIO = true;
+  if (hasIO) window.__seltikaRevealIO = true; /* 2026-10-18: и при reduced-motion — там мягкое появление прозрачностью (CSS в form-bridge.js) */
 
   function on(el, instant) {
     if (el.getAttribute('data-seltika-on') === '1') return;
@@ -268,7 +268,7 @@
   function initReveal() {
     var nodes = [].slice.call(document.querySelectorAll('.reveal'));
     if (!nodes.length) return;
-    if (reduce || !hasIO) { nodes.forEach(function (el) { on(el, true); }); return; }
+    if (!hasIO) { nodes.forEach(function (el) { on(el, true); }); return; }
     var h = window.innerHeight || 800;
     var io = new IntersectionObserver(function (entries) {
       var k = 0;
@@ -337,7 +337,8 @@
     { id: 'gigachat', name: 'GigaChat', query: 'Кто в Казани внедряет 1С для производства?', answer: 'Пример, не ответ модели: GigaChat опирается на русскоязычные источники, поэтому важны согласованные описание, город и факты о компании.' },
     { id: 'gemini', name: 'Gemini', query: 'Which companies implement 1C in Kazan?', answer: 'Пример, не ответ модели: Gemini берёт то, что можно процитировать. Если фактов нет в тексте страницы, компании в ответе не будет.' },
     { id: 'grok', name: 'Grok', query: 'Who is a reliable 1C partner in Kazan?', answer: 'Пример, не ответ модели: без фактов на сайте — услуги, отрасли, подтверждения — слоганы почти не попадают в ответ.' },
-    { id: 'claude', name: 'Claude', query: 'Как выбрать подрядчика по внедрению 1С в Казани?', answer: 'Пример, не ответ модели: Claude чаще советует критерии выбора и называет компании, которые эти критерии явно закрывают на своих страницах.' }
+    { id: 'claude', name: 'Claude', query: 'Как выбрать подрядчика по внедрению 1С в Казани?', answer: 'Пример, не ответ модели: Claude чаще советует критерии выбора и называет компании, которые эти критерии явно закрывают на своих страницах.' },
+    { id: 'deepseek', name: 'DeepSeek', query: 'Посоветуй надёжного интегратора 1С в Казани', answer: 'Пример, не ответ модели: DeepSeek без поиска отвечает по тому, что запомнил о компании; с поиском — по страницам, где факты о компании записаны прямо и совпадают между собой.' }
   ];
   var ACTIVE = 'shadow-[0_0_0_1px_rgb(34_184_255/0.7)]';
   var IDLE = ['shadow-[0_0_0_1px_rgb(255_255_255/0.12)]', 'hover:shadow-[0_0_0_1px_rgb(255_255_255/0.24)]'];
@@ -413,7 +414,7 @@
     var els = [].slice.call(document.querySelectorAll('.serp-row, .bar-fill'));
     if (!els.length) return;
     var play = function (el) { el.classList.add('seltika-play'); };
-    if (reduce || !hasIO) { els.forEach(play); return; }
+    if (!hasIO) { els.forEach(play); return; }
     els.forEach(function (el, i) {
       var sib = el.parentNode ? [].indexOf.call(el.parentNode.children, el) : i;
       if (!el.style.animationDelay) el.style.animationDelay = Math.min(sib * 110, 660) + 'ms';
@@ -433,4 +434,30 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
   if (mq && mq.addEventListener) mq.addEventListener('change', function (e) { if (e.matches) document.querySelectorAll('.reveal').forEach(function (el) { on(el, true); }); });
+})();
+
+/* 2026-10-18: диагностика анимации на реальном устройстве. Открыть https://seltikastudio.ru/?motion-debug (или #motion-debug).
+   Показывает: reduced-motion, UA/версию iOS, сколько анимаций запущено, ошибки JS. Обычным посетителям не видно. */
+(function () {
+  var on = /[?&#]motion-debug/.test(location.search + location.hash);
+  var errs = [];
+  window.addEventListener('error', function (e) { errs.push((e.message || 'error') + ' @' + (e.filename || '').split('/').pop() + ':' + (e.lineno || '')); });
+  if (!on) return;
+  function render() {
+    var mm = function (q) { try { return window.matchMedia(q).matches; } catch (e) { return '?'; } };
+    var an = document.getAnimations ? document.getAnimations() : null;
+    var run = an ? an.filter(function (a) { return a.playState === 'running'; }).length : 'n/a';
+    var el = document.getElementById('motion-debug') || document.createElement('pre');
+    el.id = 'motion-debug';
+    el.style.cssText = 'position:fixed;left:8px;right:8px;top:8px;z-index:99999;margin:0;padding:10px;font:11px/1.4 monospace;white-space:pre-wrap;background:#000d;color:#7f7;border-radius:8px;max-height:60vh;overflow:auto';
+    el.textContent = 'motion-debug ' + new Date().toLocaleTimeString() +
+      '\nreduced-motion: ' + mm('(prefers-reduced-motion: reduce)') + ' | pointer:coarse: ' + mm('(pointer: coarse)') +
+      '\nanimations running: ' + run + (an ? ' / ' + an.length : '') +
+      '\nhtml.class: ' + document.documentElement.className +
+      '\n.reveal on: ' + document.querySelectorAll('.reveal.is-on').length + ' / ' + document.querySelectorAll('.reveal').length +
+      '\nmarquee transform: ' + (document.querySelector('.marquee') ? getComputedStyle(document.querySelector('.marquee')).transform : '-') +
+      '\nUA: ' + navigator.userAgent + '\nJS errors: ' + (errs.length ? errs.join(' | ') : 'none');
+    if (!el.parentNode) document.body.appendChild(el);
+  }
+  window.addEventListener('load', function () { render(); setInterval(render, 1000); });
 })();

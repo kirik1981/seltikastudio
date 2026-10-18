@@ -170,7 +170,21 @@
     "@keyframes seltika-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-33.333%,0,0)}}" +
     "@-webkit-keyframes seltika-pulse{0%,100%{opacity:.45;-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(1.25);transform:scale(1.25)}}" +
     "@keyframes seltika-pulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}" +
-    (reduce ? "" :
+    (reduce ?
+      /* 2026-10-18: iPhone с «Уменьшением движения» (iOS Настройки → Универсальный доступ → Движение) отдаёт prefers-reduced-motion:reduce в Safari и Chrome. Раньше это гасило ВСЮ анимацию; теперь оставляем мягкую: медленные вращения/бегущая строка, пульс точки, каретка, появление блоков только прозрачностью (без сдвига и размытия). Без наклона/параллакса и «плавания» логотипа. */
+      ".orbit-badge-spin,.orbit-ring,.orbit,.orbit-rev,.marquee,.radar-sweep,.live-dot,.caret{-webkit-animation-play-state:running!important;animation-play-state:running!important}" +
+      ".orbit-badge-spin,.orbit-ring{-webkit-animation:seltika-spin 44s linear infinite!important;animation:seltika-spin 44s linear infinite!important;-webkit-transform-origin:50% 50%;transform-origin:50% 50%}" +
+      ".orbit-ring{-webkit-animation-duration:96s!important;animation-duration:96s!important}" +
+      ".orbit{-webkit-animation:seltika-spin 56s linear infinite!important;animation:seltika-spin 56s linear infinite!important}" +
+      ".orbit-rev{-webkit-animation:seltika-spin 72s linear infinite reverse!important;animation:seltika-spin 72s linear infinite reverse!important}" +
+      ".marquee{-webkit-animation:seltika-marquee 56s linear infinite!important;animation:seltika-marquee 56s linear infinite!important}" +
+      ".radar-sweep{-webkit-animation:seltika-spin 11s linear infinite!important;animation:seltika-spin 11s linear infinite!important}" +
+      ".live-dot{-webkit-animation:seltika-pulse 2.6s ease-in-out infinite!important;animation:seltika-pulse 2.6s ease-in-out infinite!important}" +
+      ".caret{-webkit-animation:seltika-pulse 1s step-end infinite!important;animation:seltika-pulse 1s step-end infinite!important}" +
+      "html.js .reveal{-webkit-transform:none!important;transform:none!important;filter:none!important;-webkit-transition:opacity .45s ease!important;transition:opacity .45s ease!important}" +
+      "html.js .reveal:not(.is-on){opacity:0!important}" +
+      ".bar-fill.seltika-play{-webkit-animation:bar-grow .8s ease both!important;animation:bar-grow .8s ease both!important}"
+    :
       ".logo-float,.orbit,.orbit-rev,.orbit-badge-spin,.orbit-ring,.marquee,.radar-sweep,.live-dot,.caret{" +
         "-webkit-animation-play-state:running!important;animation-play-state:running!important}" +
       ".logo-float{-webkit-animation:seltika-float 7s ease-in-out infinite!important;animation:seltika-float 7s ease-in-out infinite!important;-webkit-transform:translateZ(0);transform:translateZ(0)}" +
