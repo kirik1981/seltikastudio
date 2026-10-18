@@ -46,6 +46,9 @@ Allow: /
 User-agent: Gemini-Deep-Research
 Allow: /
 
+User-agent: DeepSeekBot
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 
