@@ -104,6 +104,8 @@ B2B, отели, локальный бизнес, SaaS и магазины в Р
 - [Алиса](https://seltikastudio.ru/alice/)
 - [AI-радар](https://seltikastudio.ru/radar/)
 - [Источники](https://seltikastudio.ru/sources/)
+- [Новости](https://seltikastudio.ru/novosti/): что меняется в работе студии
+- [DeepSeek — восьмая система в AI-аудите (18.10.2026)](https://seltikastudio.ru/novosti/deepseek-8-sistem/)
 - [Полный профиль](https://seltikastudio.ru/llms-full.txt)
 
 ## Типичные вопросы
