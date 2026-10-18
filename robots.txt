@@ -110,6 +110,5 @@ User-agent: Claude-Web
 Allow: /
 
 Sitemap: https://seltikastudio.ru/sitemap.xml
-Host: https://seltikastudio.ru
 # llms-txt: https://seltikastudio.ru/llms.txt
 # IndexNow: https://seltikastudio.ru/1558e3c9381e4ac7993c6a62bd533b8f.txt
