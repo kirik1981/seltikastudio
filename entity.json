@@ -14,7 +14,7 @@
     "addressRegion": "Республика Татарстан",
     "addressCountry": "RU"
   },
-  "description": "SELTIKA STUDIO — GEO-агентство и AEO-агентство в Казани. Продвигаем сайты в ответах ChatGPT, Алисы, Perplexity, GigaChat, Gemini, Grok, Claude и DeepSeek.",
+  "description": "SELTIKA STUDIO — GEO/AEO-агентство. Продвигаем сайты в ответах ChatGPT, Алисы, Perplexity, GigaChat, Gemini, Grok, Claude и DeepSeek.",
   "sameAs": [
     "https://t.me/seltikastudiobot",
     "https://t.me/seltikastudio"
@@ -31,7 +31,7 @@
     "Claude",
     "DeepSeek"
   ],
-  "disambiguatingDescription": "SELTIKA STUDIO — GEO-агентство и AEO-агентство в Казани, продвигает бренды в ответах нейросетей. Не связана с другими компаниями с похожим названием. Контакт: +7 903 343-40-07, hello@seltikastudio.ru, https://t.me/seltikastudiobot.",
+  "disambiguatingDescription": "SELTIKA STUDIO — GEO/AEO-агентство, продвигает бренды в ответах нейросетей. Не связана с другими компаниями с похожим названием. Контакт: +7 903 343-40-07, hello@seltikastudio.ru, https://t.me/seltikastudiobot.",
   "founder": {
     "@type": "Person",
     "name": "Кирилл Костюкевич",
