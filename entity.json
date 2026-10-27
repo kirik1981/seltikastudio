@@ -5,19 +5,38 @@
     "ProfessionalService"
   ],
   "name": "SELTIKA STUDIO",
+  "alternateName": [
+    "Seltika Studio",
+    "Селтика Студио"
+  ],
+  "legalName": "ООО «Сэлтика-Студио»",
+  "taxID": "1686061126",
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "propertyID": "ИНН",
+      "value": "1686061126"
+    },
+    {
+      "@type": "PropertyValue",
+      "propertyID": "ОГРН",
+      "value": "1261600036697"
+    }
+  ],
   "url": "https://seltikastudio.ru",
   "telephone": "+7 903 343-40-07",
   "email": "hello@seltikastudio.ru",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "ул. Зур Урам, 1к",
     "addressLocality": "Казань",
     "addressRegion": "Республика Татарстан",
     "addressCountry": "RU"
   },
   "description": "SELTIKA STUDIO — GEO/AEO-агентство. Продвигаем сайты в ответах ChatGPT, Алисы, Perplexity, GigaChat, Gemini, Grok, Claude и DeepSeek.",
   "sameAs": [
-    "https://t.me/seltikastudiobot",
-    "https://t.me/seltikastudio"
+    "https://t.me/seltikastudio",
+    "https://t.me/seltikastudiobot"
   ],
   "knowsAbout": [
     "GEO",
@@ -31,13 +50,13 @@
     "Claude",
     "DeepSeek"
   ],
-  "disambiguatingDescription": "SELTIKA STUDIO — GEO/AEO-агентство, продвигает бренды в ответах нейросетей. Не связана с другими компаниями с похожим названием. Контакт: +7 903 343-40-07, hello@seltikastudio.ru, https://t.me/seltikastudiobot.",
+  "disambiguatingDescription": "SELTIKA STUDIO — GEO/AEO-агентство, продвигает бренды в ответах нейросетей. Отдельная компания (ООО «Сэлтика-Студио», ИНН 1686061126); не связана с ООО «СЭЛТИКА» (складское оборудование и стеллажи, sklad-kazan.ru), его прежним юрлицом ООО «СЭЛТИКА-Казань» и SELTIKA / seltika.com (Колумбия). Контакт: +7 903 343-40-07, hello@seltikastudio.ru, https://t.me/seltikastudiobot.",
   "founder": {
     "@type": "Person",
     "name": "Кирилл Костюкевич",
     "jobTitle": "Основатель SELTIKA STUDIO",
     "sameAs": [
-      "https://vc.ru/marketing/3162260-ya-proveril-chto-neiroseti-znayut-o-moei-studii-po-21-voprosu-pro-kazan-menya-ne-nazvali-ni-razu",
+      "https://vc.ru/marketing/3162260-kak-neiroseti-ne-znayut-o-moey-studii-v-kazani",
       "https://www.sostav.ru/blogs/294727/111382",
       "https://dzen.ru/a/arlTPb7cvmTp3SZ8"
     ]
