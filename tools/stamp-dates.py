@@ -3,7 +3,7 @@
 Дата страницы = день последнего изменения её СОДЕРЖИМОГО:
   - если рабочая копия по содержимому отличается от HEAD → сегодня;
   - иначе — дата самого свежего коммита, где содержимое отличалось от родителя (git log --follow).
-Технические правки не считаются (normalize): cache-bust ?v=N, блоки <header>/<footer> (общая навигация),
+Технические правки не считаются (normalize): cache-bust ?v=N, теги <link> (favicon, стили, canonical), блоки <header>/<footer> (общая навигация),
 сами даты (data-freshness/<time>, dateModified), JSON-LD (общая разметка организации), скрипты, пробелы.
 Правит: видимую дату, "dateModified" в JSON-LD и <lastmod> в sitemap.xml. datePublished не трогает. Ничего не пушит.
 Дата не опускается ниже той, что стояла на странице до сегодняшнего дня (последний коммит до 00:00) —
@@ -17,9 +17,10 @@ def norm(s):
     s = re.sub(r'<script\b.*?</script>', '', s, flags=re.S)
     s = re.sub(r'<(header|footer)\b.*?</\1>', '', s, flags=re.S)
     s = re.sub(r'\?v=\d+', '', s)
+    s = re.sub(r'<link\b[^>]*>', '', s)
     s = re.sub(r'data-freshness="[^"]*"', '', s)
     s = re.sub(r'<time datetime="[^"]*">[^<]*</time>', '', s)
-    s = re.sub(r'"dateModified":"[^"]*"', '', s)
+    s = re.sub(r'"dateModified":\s*"[^"]*"', '', s)
     return re.sub(r'\s+', ' ', s).strip()
 def at(rev, f): return sh('git', 'show', f'{rev}:{f}')
 today = datetime.date.today().isoformat()
@@ -39,7 +40,7 @@ def file_for(loc):
 base = sh('git', 'rev-list', '-1', f'--before={today}T00:00', 'HEAD').strip()
 def floor_for(f, loc):
     if not base: return ''
-    old = at(base, f); ds = re.findall(r'data-freshness="(\d{4}-\d\d-\d\d)"|"dateModified":"(\d{4}-\d\d-\d\d)"', old)
+    old = at(base, f); ds = re.findall(r'data-freshness="(\d{4}-\d\d-\d\d)"|"dateModified":\s*"(\d{4}-\d\d-\d\d)"', old)
     ds = [a or b for a, b in ds]
     if not ds:
         m = re.search(r'<loc>' + re.escape(loc) + r'</loc>\s*<lastmod>([^<]+)</lastmod>', at(base, 'sitemap.xml'))
@@ -54,7 +55,7 @@ def fix_url(m):
     s = open(f).read(); ru = f'{d[8:]}.{d[5:7]}.{d[:4]}'
     n = re.sub(r'data-freshness="\d{4}-\d\d-\d\d">Обновлено: <time datetime="\d{4}-\d\d-\d\d">[\d.]+</time>',
                f'data-freshness="{d}">Обновлено: <time datetime="{d}">{ru}</time>', s)
-    n = re.sub(r'"dateModified":"\d{4}-\d\d-\d\d"', f'"dateModified":"{d}"', n)
+    n = re.sub(r'("dateModified":\s*)"\d{4}-\d\d-\d\d"', lambda m: f'{m.group(1)}"{d}"', n)
     out.append(f'{f}: {d}' + (' (изменено)' if n != s else ''))
     if n != s and not DRY: open(f, 'w').write(n)
     return re.sub(r'<lastmod>[^<]*</lastmod>', f'<lastmod>{d}</lastmod>', block)
