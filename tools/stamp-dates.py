@@ -3,7 +3,7 @@
 Дата страницы = день последнего изменения её СОДЕРЖИМОГО:
   - если рабочая копия по содержимому отличается от HEAD → сегодня;
   - иначе — дата самого свежего коммита, где содержимое отличалось от родителя (git log --follow).
-Технические правки не считаются (normalize): cache-bust ?v=N, теги <link> (favicon, стили, canonical), блоки <header>/<footer> (общая навигация),
+Технические правки не считаются (normalize): cache-bust ?v=N, теги <link> (favicon, стили, canonical), meta description / og:description / twitter:description, блоки <header>/<footer> (общая навигация),
 сами даты (data-freshness/<time>, dateModified), JSON-LD (общая разметка организации), скрипты, пробелы.
 Правит: видимую дату, "dateModified" в JSON-LD и <lastmod> в sitemap.xml. datePublished не трогает. Ничего не пушит.
 Дата не опускается ниже той, что стояла на странице до сегодняшнего дня (последний коммит до 00:00) —
@@ -18,6 +18,7 @@ def norm(s):
     s = re.sub(r'<(header|footer)\b.*?</\1>', '', s, flags=re.S)
     s = re.sub(r'\?v=\d+', '', s)
     s = re.sub(r'<link\b[^>]*>', '', s)
+    s = re.sub(r'<meta\s+(?:name|property)="(?:description|og:description|twitter:description)"[^>]*>', '', s)
     s = re.sub(r'data-freshness="[^"]*"', '', s)
     s = re.sub(r'<time datetime="[^"]*">[^<]*</time>', '', s)
     s = re.sub(r'"dateModified":\s*"[^"]*"', '', s)
