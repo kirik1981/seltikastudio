@@ -22,6 +22,12 @@ def norm(s):
     s = re.sub(r'data-freshness="[^"]*"', '', s)
     s = re.sub(r'<time datetime="[^"]*">[^<]*</time>', '', s)
     s = re.sub(r'"dateModified":\s*"[^"]*"', '', s)
+    # 2026-11-12: технические теги не считаются правкой содержимого (не двигают дату):
+    # <meta charset>, <meta http-equiv> (CSP и т.п.), <meta name="robots">, пустая обёртка строки «Обновлено:».
+    s = re.sub(r'<meta\s+charset=[^>]*>', '', s, flags=re.I)
+    s = re.sub(r'<meta\s+http-equiv=[^>]*>', '', s, flags=re.I)
+    s = re.sub(r'<meta\s+name="robots"[^>]*>', '', s, flags=re.I)
+    s = re.sub(r'<p\b[^>]*class="freshness-date[^"]*"[^>]*>\s*Обновлено:\s*</p>', '', s)
     return re.sub(r'\s+', ' ', s).strip()
 def at(rev, f): return sh('git', 'show', f'{rev}:{f}')
 today = datetime.date.today().isoformat()
