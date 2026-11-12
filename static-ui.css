@@ -42,3 +42,8 @@ select.lead-select option{background:#101722;color:#f2f5f7}
 #cookie-notice a{color:#22b8ff;text-decoration:underline}
 #cookie-notice button{flex-shrink:0;height:2.25rem;padding:0 1rem;border-radius:.5rem;background:#22b8ff;color:#041018;font-weight:500;cursor:pointer}
 @media print{#cookie-notice{display:none}}
+
+/* v5 (2026-11-12): страховка видимости — если static-ui.js не выполнился (сеть, блокировщик, ошибка), блоки .reveal
+   всё равно становятся видимыми через 3 с. Класс ui-ready ставит static-ui.js, тогда страховка не нужна. */
+@keyframes ss-reveal-failsafe{to{opacity:1;filter:none;transform:none}}
+html.js:not(.ui-ready) .reveal:not(.is-on){animation:ss-reveal-failsafe .01s 3s forwards}

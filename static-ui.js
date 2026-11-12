@@ -1,4 +1,6 @@
 /*! static-ui.js v6 — vanilla helpers after SPA hydration is disabled: menu, forms, package choice, cookie notice, motion */
+/* 2026-11-12: скрипт выполнился — страховка видимости .reveal в static-ui.css не нужна */
+document.documentElement.classList.add('ui-ready');
 (function () {
   function getNavLinks() {
     var desktop = document.querySelector('nav[aria-label="Основное"]');
