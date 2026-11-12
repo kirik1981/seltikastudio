@@ -47,3 +47,6 @@ select.lead-select option{background:#101722;color:#f2f5f7}
    всё равно становятся видимыми через 3 с. Класс ui-ready ставит static-ui.js, тогда страховка не нужна. */
 @keyframes ss-reveal-failsafe{to{opacity:1;filter:none;transform:none}}
 html.js:not(.ui-ready) .reveal:not(.is-on){animation:ss-reveal-failsafe .01s 3s forwards}
+
+/* v6 (2026-11-12): первый экран (H1, подзаголовок, капсула ответа) виден сразу, без анимации появления — не ждёт JS и не задерживает LCP */
+main#content>section:first-of-type .reveal{opacity:1!important;filter:none!important;transform:none!important;transition:none!important;animation:none!important}
