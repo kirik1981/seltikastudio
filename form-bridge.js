@@ -230,6 +230,17 @@
   var spokes = [];
   var hostEl = null;
   var svgEl = null;
+  /* 2026-11-12: анимация точек графа идёт только пока #graph виден на экране (IntersectionObserver);
+     при prefers-reduced-motion не запускается вовсе — точки остаются статичными в SVG. */
+  var graphVisible = !("IntersectionObserver" in window);
+
+  function startLoop() {
+    if (!rafId && graphVisible && spokes.length) rafId = requestAnimationFrame(tick);
+  }
+
+  function stopLoop() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
+  }
 
   function map(x, y) {
     if (!svgEl || !hostEl) return { x: 0, y: 0 };
@@ -259,10 +270,12 @@
       s.el.style.webkitTransform = "translate3d(" + pt.x + "px," + pt.y + "px,0)";
       s.el.style.transform = "translate3d(" + pt.x + "px," + pt.y + "px,0)";
     }
+    if (!graphVisible) { rafId = 0; return; }
     rafId = requestAnimationFrame(tick);
   }
 
   function bootGraph() {
+    if (reduce) return false;
     var section = document.getElementById("graph");
     if (!section) return false;
     var svg = section.querySelector("svg");
@@ -301,13 +314,21 @@
     svgEl = svg;
     panel.setAttribute("data-seltika-dots", "on");
     svg.setAttribute("data-seltika-motion", "on");
-    rafId = requestAnimationFrame(tick);
+    startLoop();
     return true;
   }
 
   function watch() {
-    bootGraph();
+    if (reduce) return;
     var section = document.getElementById("graph");
+    if (section && !section._seltikaIO && "IntersectionObserver" in window) {
+      section._seltikaIO = new IntersectionObserver(function (entries) {
+        graphVisible = entries[entries.length - 1].isIntersecting;
+        if (graphVisible) startLoop(); else stopLoop();
+      }, { rootMargin: "100px" });
+      section._seltikaIO.observe(section);
+    }
+    bootGraph();
     if (!section || section._seltikaObs) return;
     section._seltikaObs = new MutationObserver(function () {
       var panel = section.querySelector(".panel") || (section.querySelector("svg") && section.querySelector("svg").parentNode);
