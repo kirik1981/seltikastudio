@@ -1,7 +1,7 @@
 /* brand-enhancements.css
-   Визуальные токены и аккуратные улучшения SELTIKA STUDIO
-   Подключён через static-ui.css. Только CSS — не ломает текст и структуру.
-   Канон: белый фон, акценты cyan / orange / steel, Manrope + IBM Plex Mono.
+   Более заметные премиальные улучшения SELTIKA STUDIO
+   По рекомендациям Дизайнера Studio (в духе Linear / Vercel / Stripe).
+   Только CSS. Не ломает текст и видимость для нейросетей.
 */
 
 :root {
@@ -10,11 +10,11 @@
   --ss-steel: #2F4A5C;
   --ss-cyan: #22B8FF;
   --ss-orange: #FF8A24;
-  --ss-hairline: #D8D2C8;
-  --ss-paper: #EFEAE2;
+  --ss-hairline: rgba(47, 74, 92, 0.14);
+  --ss-paper: #F7F9FA;
   --ss-muted: #6B6560;
-  --ss-radius: 12px;
-  --ss-radius-sm: 8px;
+  --ss-radius: 20px;
+  --ss-radius-sm: 12px;
   --ss-font-sans: 'Manrope', system-ui, sans-serif;
   --ss-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
@@ -24,43 +24,24 @@ body {
   font-family: var(--ss-font-sans);
   color: var(--ss-ink);
   background: var(--ss-bg);
-  line-height: 1.65;
+  font-size: 18px;
+  line-height: 1.6;
 }
 
-/* Улучшаем существующие карточки и блоки */
-.rounded-2xl, .rounded-xl, .rounded-lg, [class*="card"], section > div > div {
-  border-radius: var(--ss-radius) !important;
+/* Hero и заголовки — масштаб */
+h1, .font-display {
+  font-size: clamp(44px, 6.4vw, 88px) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.02 !important;
+  max-width: 14ch;
 }
 
-/* Hairline-стиль для карточек */
-.border, .border-b, [class*="border-"] {
-  border-color: var(--ss-hairline) !important;
-}
-
-/* Кнопки */
-a[class*="bg-"], button[class*="bg-"] {
-  border-radius: var(--ss-radius-sm) !important;
-  font-weight: 500;
-  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-a[class*="bg-metal"], a[class*="bg-primary"], button[class*="bg-metal"] {
-  background: var(--ss-cyan) !important;
-  color: #041018 !important;
-}
-
-a[class*="bg-metal"]:hover, a[class*="bg-primary"]:hover {
-  background: #1aa8ef !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgb(34 184 255 / 0.25);
-}
-
-/* Заголовки — более уверенная иерархия */
-h1, h2, .font-display {
-  font-family: var(--ss-font-sans);
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  font-weight: 600;
+h2 {
+  font-size: clamp(32px, 4vw, 52px) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.15 !important;
 }
 
 h3 {
@@ -68,27 +49,37 @@ h3 {
   letter-spacing: -0.01em;
 }
 
-/* Моноширинные цифры и метки */
-.font-mono, [class*="mono"], code, .text-sm.font-medium {
-  font-family: var(--ss-font-mono);
+/* Карточки */
+.rounded-2xl, .rounded-xl, .rounded-lg, [class*="card"], section > div > div {
+  border-radius: var(--ss-radius) !important;
+  border: 1px solid var(--ss-hairline) !important;
+  padding: 32px !important;
+  background: #fff;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-/* Больше воздуха в секциях */
-section {
-  padding-top: 5.5rem;
-  padding-bottom: 5.5rem;
+.rounded-2xl:hover, .rounded-xl:hover, [class*="card"]:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 184, 255, 0.45) !important;
+  box-shadow: 0 12px 32px -12px rgba(47, 74, 92, 0.18);
 }
 
-@media (max-width: 768px) {
-  section {
-    padding-top: 3.75rem;
-    padding-bottom: 3.75rem;
-  }
+/* Кнопки — тёмная основная выглядит дороже */
+a[class*="bg-metal"], a[class*="bg-primary"], button[class*="bg-metal"], a[href*="plan=audit"] {
+  background: var(--ss-ink) !important;
+  color: #ffffff !important;
+  height: 52px;
+  padding: 0 28px !important;
+  border-radius: 999px !important;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
-/* Акценты */
-.text-primary, [class*="text-cyan"], .text-accent {
-  color: var(--ss-cyan) !important;
+a[class*="bg-metal"]:hover, a[class*="bg-primary"]:hover, a[href*="plan=audit"]:hover {
+  background: #2a2927 !important;
+  transform: translateY(-1px);
 }
 
 /* Ссылки */
@@ -103,38 +94,44 @@ a:not([class*="bg-"]):not([class*="button"]):hover {
   color: var(--ss-cyan);
 }
 
-/* Лёгкие появления для блоков */
-@media (prefers-reduced-motion: no-preference) {
-  section {
-    animation: ss-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  section:nth-child(2) { animation-delay: 0.1s; }
-  section:nth-child(3) { animation-delay: 0.2s; }
+/* Акцентное подчёркивание */
+h1 span, h2 span, .text-primary {
+  text-decoration: underline;
+  text-decoration-color: var(--ss-cyan);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
 }
 
-@keyframes ss-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Воздух и ритм */
+section {
+  padding-top: clamp(96px, 12vw, 160px) !important;
+  padding-bottom: clamp(96px, 12vw, 160px) !important;
 }
 
-/* Не ломаем существующие важные элементы */
+/* Цифры в моно */
+.font-mono, [class*="mono"], code, .text-sm.font-medium {
+  font-family: var(--ss-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Выделение */
+::selection {
+  background: rgba(34, 184, 255, 0.18);
+}
+
+/* Не ломаем хедер и футер */
 header, nav, footer {
   animation: none !important;
 }
 
-/* Тонкая акцентная линия под заголовками секций */
-section h2::after {
-  content: "";
-  display: block;
-  width: 2.5rem;
-  height: 2px;
-  background: var(--ss-orange);
-  margin-top: 0.75rem;
-  border-radius: 1px;
+/* Лёгкие появления */
+@media (prefers-reduced-motion: no-preference) {
+  section {
+    animation: ss-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes ss-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
