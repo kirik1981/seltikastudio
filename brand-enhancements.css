@@ -1,6 +1,7 @@
 /* brand-enhancements.css
    Следующий уровень + SVG-акценты и микро-анимации
    + улучшение блоков цен и шагов
+   + абстрактная сетка видимости в hero (CSS, готово к 3D)
    Только CSS. Не ломает текст и видимость для нейросетей.
 */
 
@@ -187,21 +188,46 @@ section + section::before {
   opacity: 1;
 }
 
-/* Подготовка места под 3D в hero (пока заглушка) */
+/* Абстрактная сетка видимости в hero (CSS-версия 3D-сцены) */
 .hero-spot, section:first-of-type {
   position: relative;
+  overflow: hidden;
 }
 
 .hero-spot::after, section:first-of-type::after {
   content: "";
   position: absolute;
-  right: 5%;
+  right: 4%;
   top: 50%;
   transform: translateY(-50%);
-  width: 280px;
-  height: 280px;
-  background: radial-gradient(circle, rgba(34,184,255,0.08) 0%, transparent 70%);
+  width: 320px;
+  height: 320px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(34,184,255,0.15) 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(255,138,36,0.12) 0%, transparent 35%),
+    radial-gradient(circle at 50% 50%, rgba(47,74,92,0.06) 0%, transparent 60%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
+  animation: ss-float 12s ease-in-out infinite;
+}
+
+@keyframes ss-float {
+  0%, 100% { transform: translateY(-50%) scale(1); }
+  50% { transform: translateY(-48%) scale(1.04); }
+}
+
+@media (max-width: 1024px) {
+  .hero-spot::after, section:first-of-type::after {
+    width: 220px;
+    height: 220px;
+    right: 2%;
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-spot::after, section:first-of-type::after {
+    animation: none;
+  }
 }
