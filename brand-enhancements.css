@@ -2,7 +2,7 @@
    Следующий уровень + SVG-акценты и микро-анимации
    + улучшение блоков цен и шагов (усиленная иерархия + визуальная связь)
    + абстрактная сетка видимости в hero (CSS, готово к 3D)
-   + исправление бегущей строки (.marquee)
+   + исправление бегущей строки (без конфликта)
    + полировка фокуса и деталей
    + уточнённые микро-анимации карточек
    + мобильная полировка
@@ -274,35 +274,13 @@ section + section::before {
   }
 }
 
-/* Исправление бегущей строки (.marquee) */
+/* Бегущая строка — только защита от обрезки, без перезаписи анимации */
 .marquee {
-  display: flex;
-  gap: 2.5rem;
   white-space: nowrap;
-  animation: ss-marquee 28s linear infinite;
-  will-change: transform;
 }
 
-.marquee:hover {
-  animation-play-state: paused;
-}
-
-@keyframes ss-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@media (max-width: 640px) {
-  .marquee {
-    gap: 1.5rem;
-    animation-duration: 22s;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    animation: none;
-  }
+.marquee span {
+  flex-shrink: 0;
 }
 
 /* Мобильная полировка */
