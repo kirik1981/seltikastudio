@@ -1,5 +1,5 @@
 /* brand-enhancements.css
-   Следующий уровень: ближе к дорогой tech-студии (Linear / Vercel light)
+   Следующий уровень + SVG-акценты и микро-анимации
    Только CSS. Не ломает текст и видимость для нейросетей.
 */
 
@@ -43,7 +43,7 @@ h2 {
   line-height: 1.1 !important;
 }
 
-/* Карточки — более точные */
+/* Карточки — более точные + stagger */
 .rounded-2xl, .rounded-xl, .rounded-lg, [class*="card"], section > div > div {
   border-radius: var(--ss-radius) !important;
   border: 1px solid var(--ss-hairline) !important;
@@ -121,11 +121,15 @@ header, nav, footer {
   animation: none !important;
 }
 
-/* Лёгкие появления */
+/* Лёгкие появления + stagger для карточек */
 @media (prefers-reduced-motion: no-preference) {
   section {
     animation: ss-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
+  section > div > div:nth-child(1) { animation-delay: 0.05s; }
+  section > div > div:nth-child(2) { animation-delay: 0.1s; }
+  section > div > div:nth-child(3) { animation-delay: 0.15s; }
+  section > div > div:nth-child(4) { animation-delay: 0.2s; }
 }
 
 @keyframes ss-fade-up {
@@ -133,13 +137,29 @@ header, nav, footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Тонкая акцентная линия под H2 */
+/* Тонкая акцентная линия под H2 (прорисовка) */
 section h2::after {
   content: "";
   display: block;
-  width: 3rem;
+  width: 0;
   height: 2px;
   background: var(--ss-orange);
   margin-top: 1rem;
   border-radius: 1px;
+  animation: ss-draw-line 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+@keyframes ss-draw-line {
+  to { width: 3rem; }
+}
+
+/* Дополнительная тонкая линия-разделитель между секциями */
+section + section::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: var(--ss-hairline);
+  margin: 0 auto;
+  max-width: 64rem;
+  opacity: 0.6;
 }
