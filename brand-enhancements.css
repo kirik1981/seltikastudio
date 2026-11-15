@@ -1,6 +1,6 @@
 /* brand-enhancements.css
    Следующий уровень + SVG-акценты и микро-анимации
-   + улучшение блоков цен и шагов
+   + улучшение блоков цен и шагов (усиленная иерархия)
    + абстрактная сетка видимости в hero (CSS, готово к 3D)
    + исправление бегущей строки (.marquee)
    + полировка фокуса и деталей
@@ -195,6 +195,18 @@ section + section::before {
 
 [class*="price"]:hover::before, [class*="plan"]:hover::before {
   opacity: 1;
+}
+
+/* Более чёткая иерархия в блоках цен */
+[class*="price"] h3, [class*="plan"] h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.5rem;
+}
+
+[class*="price"] .font-mono, [class*="plan"] .font-mono {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--ss-ink);
 }
 
 /* Абстрактная сетка видимости в hero (CSS-версия 3D-сцены) */
