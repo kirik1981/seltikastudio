@@ -1,6 +1,5 @@
 /* brand-enhancements.css
-   Более заметные премиальные улучшения SELTIKA STUDIO
-   По рекомендациям Дизайнера Studio (в духе Linear / Vercel / Stripe).
+   Следующий уровень: ближе к дорогой tech-студии (Linear / Vercel light)
    Только CSS. Не ломает текст и видимость для нейросетей.
 */
 
@@ -10,7 +9,7 @@
   --ss-steel: #2F4A5C;
   --ss-cyan: #22B8FF;
   --ss-orange: #FF8A24;
-  --ss-hairline: rgba(47, 74, 92, 0.14);
+  --ss-hairline: rgba(47, 74, 92, 0.12);
   --ss-paper: #F7F9FA;
   --ss-muted: #6B6560;
   --ss-radius: 20px;
@@ -25,68 +24,66 @@ body {
   color: var(--ss-ink);
   background: var(--ss-bg);
   font-size: 18px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
-/* Hero и заголовки — масштаб */
+/* Hero — максимальный масштаб */
 h1, .font-display {
-  font-size: clamp(44px, 6.4vw, 88px) !important;
+  font-size: clamp(48px, 7vw, 96px) !important;
   font-weight: 700 !important;
-  letter-spacing: -0.035em !important;
-  line-height: 1.02 !important;
-  max-width: 14ch;
+  letter-spacing: -0.04em !important;
+  line-height: 0.98 !important;
+  max-width: 12ch;
 }
 
 h2 {
-  font-size: clamp(32px, 4vw, 52px) !important;
+  font-size: clamp(36px, 4.5vw, 56px) !important;
   font-weight: 600 !important;
-  letter-spacing: -0.025em !important;
-  line-height: 1.15 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.1 !important;
 }
 
-h3 {
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-/* Карточки */
+/* Карточки — более точные */
 .rounded-2xl, .rounded-xl, .rounded-lg, [class*="card"], section > div > div {
   border-radius: var(--ss-radius) !important;
   border: 1px solid var(--ss-hairline) !important;
-  padding: 32px !important;
+  padding: 36px !important;
   background: #fff;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  box-shadow: 0 1px 2px rgba(28, 27, 25, 0.03);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .rounded-2xl:hover, .rounded-xl:hover, [class*="card"]:hover {
-  transform: translateY(-4px);
-  border-color: rgba(34, 184, 255, 0.45) !important;
-  box-shadow: 0 12px 32px -12px rgba(47, 74, 92, 0.18);
+  transform: translateY(-6px);
+  border-color: rgba(34, 184, 255, 0.5) !important;
+  box-shadow: 0 16px 40px -16px rgba(47, 74, 92, 0.2);
 }
 
-/* Кнопки — тёмная основная выглядит дороже */
+/* Кнопки */
 a[class*="bg-metal"], a[class*="bg-primary"], button[class*="bg-metal"], a[href*="plan=audit"] {
   background: var(--ss-ink) !important;
   color: #ffffff !important;
-  height: 52px;
-  padding: 0 28px !important;
+  height: 54px;
+  padding: 0 32px !important;
   border-radius: 999px !important;
   font-weight: 600;
+  letter-spacing: -0.01em;
   display: inline-flex;
   align-items: center;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 a[class*="bg-metal"]:hover, a[class*="bg-primary"]:hover, a[href*="plan=audit"]:hover {
   background: #2a2927 !important;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(28, 27, 25, 0.15);
 }
 
 /* Ссылки */
 a:not([class*="bg-"]):not([class*="button"]) {
   color: var(--ss-steel);
   text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+  text-underline-offset: 4px;
   transition: color 0.15s ease;
 }
 
@@ -99,13 +96,13 @@ h1 span, h2 span, .text-primary {
   text-decoration: underline;
   text-decoration-color: var(--ss-cyan);
   text-decoration-thickness: 3px;
-  text-underline-offset: 6px;
+  text-underline-offset: 8px;
 }
 
 /* Воздух и ритм */
 section {
-  padding-top: clamp(96px, 12vw, 160px) !important;
-  padding-bottom: clamp(96px, 12vw, 160px) !important;
+  padding-top: clamp(112px, 14vw, 180px) !important;
+  padding-bottom: clamp(112px, 14vw, 180px) !important;
 }
 
 /* Цифры в моно */
@@ -116,7 +113,7 @@ section {
 
 /* Выделение */
 ::selection {
-  background: rgba(34, 184, 255, 0.18);
+  background: rgba(34, 184, 255, 0.2);
 }
 
 /* Не ломаем хедер и футер */
@@ -127,11 +124,22 @@ header, nav, footer {
 /* Лёгкие появления */
 @media (prefers-reduced-motion: no-preference) {
   section {
-    animation: ss-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: ss-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }
 
 @keyframes ss-fade-up {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Тонкая акцентная линия под H2 */
+section h2::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 2px;
+  background: var(--ss-orange);
+  margin-top: 1rem;
+  border-radius: 1px;
 }
