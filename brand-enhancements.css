@@ -6,6 +6,7 @@
    + полировка фокуса и деталей
    + уточнённые микро-анимации карточек
    + мобильная полировка
+   + финальная полировка
    Только CSS. Не ломает текст и видимость для нейросетей.
 */
 
@@ -335,4 +336,14 @@ section + section::before {
     width: 100%;
     justify-content: center;
   }
+}
+
+/* Финальная полировка */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a, button {
+  transition: color 0.15s ease, background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
