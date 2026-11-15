@@ -1,5 +1,6 @@
 /* brand-enhancements.css
    Следующий уровень + SVG-акценты и микро-анимации
+   + улучшение блоков цен и шагов
    Только CSS. Не ломает текст и видимость для нейросетей.
 */
 
@@ -162,4 +163,45 @@ section + section::before {
   margin: 0 auto;
   max-width: 64rem;
   opacity: 0.6;
+}
+
+/* Улучшение карточек цен и шагов */
+[class*="price"], [class*="plan"], [class*="step"] {
+  position: relative;
+}
+
+[class*="price"]::before, [class*="plan"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--ss-cyan);
+  border-radius: 2px 0 0 2px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+[class*="price"]:hover::before, [class*="plan"]:hover::before {
+  opacity: 1;
+}
+
+/* Подготовка места под 3D в hero (пока заглушка) */
+.hero-spot, section:first-of-type {
+  position: relative;
+}
+
+.hero-spot::after, section:first-of-type::after {
+  content: "";
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(34,184,255,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
 }
