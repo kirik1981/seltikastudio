@@ -1,6 +1,6 @@
 /* brand-enhancements.css
    Следующий уровень + SVG-акценты и микро-анимации
-   + улучшение блоков цен и шагов (усиленная иерархия)
+   + улучшение блоков цен и шагов (усиленная иерархия + визуальная связь)
    + абстрактная сетка видимости в hero (CSS, готово к 3D)
    + исправление бегущей строки (.marquee)
    + полировка фокуса и деталей
@@ -207,6 +207,24 @@ section + section::before {
   font-size: 1.75rem;
   font-weight: 500;
   color: var(--ss-ink);
+}
+
+/* Визуальная связь шагов «Как работаем» */
+[class*="step"] {
+  counter-increment: step;
+}
+
+[class*="step"]::after {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  top: -0.75rem;
+  left: 1.5rem;
+  font-family: var(--ss-font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ss-orange);
+  background: #fff;
+  padding: 0 0.4rem;
 }
 
 /* Абстрактная сетка видимости в hero (CSS-версия 3D-сцены) */
