@@ -1,4 +1,6 @@
 /* static-ui.css — header fit after static HTML became authoritative (6 nav links + phone + Telegram) */
+@import url('/brand-enhancements.css');
+
 header nav[aria-label="Основное"] a,header .lg\:flex a{white-space:nowrap}
 @media (min-width:1024px) and (max-width:1439px){
   header nav[aria-label="Основное"]{gap:1.1rem}
