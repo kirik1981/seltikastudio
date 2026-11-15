@@ -5,6 +5,7 @@
    + исправление бегущей строки (.marquee)
    + полировка фокуса и деталей
    + уточнённые микро-анимации карточек
+   + мобильная полировка
    Только CSS. Не ломает текст и видимость для нейросетей.
 */
 
@@ -300,5 +301,38 @@ section + section::before {
 @media (prefers-reduced-motion: reduce) {
   .marquee {
     animation: none;
+  }
+}
+
+/* Мобильная полировка */
+@media (max-width: 640px) {
+  body {
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  h1, .font-display {
+    font-size: clamp(40px, 10vw, 64px) !important;
+    max-width: 100%;
+  }
+
+  h2 {
+    font-size: clamp(28px, 7vw, 40px) !important;
+  }
+
+  section {
+    padding-top: 72px !important;
+    padding-bottom: 72px !important;
+  }
+
+  .rounded-2xl, .rounded-xl, .rounded-lg, [class*="card"], section > div > div {
+    padding: 24px !important;
+  }
+
+  a[class*="bg-metal"], a[class*="bg-primary"], button[class*="bg-metal"], a[href*="plan=audit"] {
+    height: 48px;
+    padding: 0 24px !important;
+    width: 100%;
+    justify-content: center;
   }
 }
