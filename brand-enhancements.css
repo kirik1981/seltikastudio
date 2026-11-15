@@ -2,7 +2,7 @@
    Следующий уровень + SVG-акценты и микро-анимации
    + улучшение блоков цен и шагов (усиленная иерархия + визуальная связь)
    + абстрактная сетка видимости в hero (CSS, готово к 3D)
-   + исправление бегущей строки v4 (корректный -33.333%)
+   + исправление бегущей строки v5 (мягкая маска краёв)
    + полировка фокуса и деталей
    + уточнённые микро-анимации карточек
    + мобильная полировка
@@ -274,7 +274,7 @@ section + section::before {
   }
 }
 
-/* Бегущая строка — корректный фикс под оригинальную структуру (-33.333%) */
+/* Бегущая строка — мягкая маска краёв вместо резкой обрезки */
 .marquee {
   width: max-content !important;
   white-space: nowrap !important;
@@ -285,6 +285,12 @@ section + section::before {
   flex-shrink: 0 !important;
 }
 
+/* Мягкие края у родительского контейнера */
+.min-w-0.w-full.flex-1.overflow-hidden {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
 @keyframes marquee-slide {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(-33.333%, 0, 0); }
@@ -293,6 +299,10 @@ section + section::before {
 @media (max-width: 640px) {
   .marquee {
     animation-duration: 22s !important;
+  }
+  .min-w-0.w-full.flex-1.overflow-hidden {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
   }
 }
 
