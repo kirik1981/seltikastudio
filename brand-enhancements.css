@@ -2,6 +2,7 @@
    Следующий уровень + SVG-акценты и микро-анимации
    + улучшение блоков цен и шагов
    + абстрактная сетка видимости в hero (CSS, готово к 3D)
+   + исправление бегущей строки (.marquee)
    Только CSS. Не ломает текст и видимость для нейросетей.
 */
 
@@ -228,6 +229,37 @@ section + section::before {
 
 @media (prefers-reduced-motion: reduce) {
   .hero-spot::after, section:first-of-type::after {
+    animation: none;
+  }
+}
+
+/* Исправление бегущей строки (.marquee) */
+.marquee {
+  display: flex;
+  gap: 2.5rem;
+  white-space: nowrap;
+  animation: ss-marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes ss-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 640px) {
+  .marquee {
+    gap: 1.5rem;
+    animation-duration: 22s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
     animation: none;
   }
 }
