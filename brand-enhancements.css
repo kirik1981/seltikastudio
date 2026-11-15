@@ -4,6 +4,7 @@
    + абстрактная сетка видимости в hero (CSS, готово к 3D)
    + исправление бегущей строки (.marquee)
    + полировка фокуса и деталей
+   + уточнённые микро-анимации карточек
    Только CSS. Не ломает текст и видимость для нейросетей.
 */
 
@@ -54,13 +55,13 @@ h2 {
   padding: 36px !important;
   background: #fff;
   box-shadow: 0 1px 2px rgba(28, 27, 25, 0.03);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.45s ease;
 }
 
 .rounded-2xl:hover, .rounded-xl:hover, [class*="card"]:hover {
-  transform: translateY(-6px);
-  border-color: rgba(34, 184, 255, 0.5) !important;
-  box-shadow: 0 16px 40px -16px rgba(47, 74, 92, 0.2);
+  transform: translateY(-8px);
+  border-color: rgba(34, 184, 255, 0.55) !important;
+  box-shadow: 0 20px 48px -16px rgba(47, 74, 92, 0.22);
 }
 
 /* Кнопки */
