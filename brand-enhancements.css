@@ -1,6 +1,6 @@
 /* brand-enhancements.css
-   Визуальные токены SELTIKA STUDIO
-   Пока НЕ подключён. Можно безопасно просмотреть и потом подключить.
+   Визуальные токены и аккуратные улучшения SELTIKA STUDIO
+   Подключён через static-ui.css. Только CSS — не ломает текст и структуру.
    Канон: белый фон, акценты cyan / orange / steel, Manrope + IBM Plex Mono.
 */
 
@@ -19,58 +19,92 @@
   --ss-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
-/* Лёгкие улучшения типографики и воздуха — не ломают существующую структуру */
+/* База */
 body {
   font-family: var(--ss-font-sans);
   color: var(--ss-ink);
   background: var(--ss-bg);
+  line-height: 1.6;
 }
 
-/* Hairline-карточки */
-.ss-card {
-  background: var(--ss-bg);
-  border: 1px solid var(--ss-hairline);
-  border-radius: var(--ss-radius);
-  padding: 1.5rem;
+/* Улучшаем существующие карточки и блоки */
+.rounded-2xl, .rounded-xl, .rounded-lg, [class*="card"], section > div > div {
+  border-radius: var(--ss-radius) !important;
 }
 
-/* Акцентные кнопки */
-.ss-btn-primary {
-  background: var(--ss-cyan);
-  color: #041018;
-  border-radius: var(--ss-radius-sm);
+/* Hairline-стиль для карточек */
+.border, .border-b, [class*="border-"] {
+  border-color: var(--ss-hairline) !important;
+}
+
+/* Кнопки */
+a[class*="bg-"], button[class*="bg-"] {
+  border-radius: var(--ss-radius-sm) !important;
   font-weight: 500;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 }
-.ss-btn-primary:hover {
-  background: #1aa8ef;
+
+a[class*="bg-metal"], a[class*="bg-primary"], button[class*="bg-metal"] {
+  background: var(--ss-cyan) !important;
+  color: #041018 !important;
+}
+
+a[class*="bg-metal"]:hover, a[class*="bg-primary"]:hover {
+  background: #1aa8ef !important;
   transform: translateY(-1px);
 }
 
-.ss-btn-secondary {
-  background: transparent;
-  color: var(--ss-steel);
-  border: 1px solid var(--ss-hairline);
-  border-radius: var(--ss-radius-sm);
+/* Заголовки */
+h1, h2, h3, .font-display {
+  font-family: var(--ss-font-sans);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
-/* Моноширинные цифры / метки */
-.ss-mono {
+/* Моноширинные цифры и метки */
+.font-mono, [class*="mono"], code, .text-sm.font-medium {
   font-family: var(--ss-font-mono);
-  font-weight: 500;
 }
 
-/* Лёгкие появления (только transform + opacity) */
-@media (prefers-reduced-motion: no-preference) {
-  .ss-reveal {
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+/* Больше воздуха в секциях */
+section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
   }
-  .ss-reveal.visible {
+}
+
+/* Акценты */
+.text-primary, [class*="text-cyan"], .text-accent {
+  color: var(--ss-cyan) !important;
+}
+
+/* Лёгкие появления для блоков (только если нет prefers-reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  section {
+    animation: ss-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  section:nth-child(2) { animation-delay: 0.1s; }
+  section:nth-child(3) { animation-delay: 0.2s; }
+}
+
+@keyframes ss-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Не ломаем текущие классы — это только добавка */
+/* Не ломаем существующие важные элементы */
+header, nav, footer {
+  animation: none !important;
+}
