@@ -166,8 +166,11 @@
     "@keyframes seltika-float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-10px,0)}}" +
     "@-webkit-keyframes seltika-spin{from{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}" +
     "@keyframes seltika-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}" +
-    "@-webkit-keyframes seltika-marquee{from{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}to{-webkit-transform:translate3d(-33.333%,0,0);transform:translate3d(-33.333%,0,0)}}" +
-    "@keyframes seltika-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-33.333%,0,0)}}" +
+    /* 2026-11-18: бегущая строка — 3 копии списка с gap 2.5rem: ровно один период = (ширина + gap) / 3.
+       Раньше было -33.333% (без gap) → на стыке каждые 28 с скачок ~13 px. Плюс отдельный GPU-слой, чтобы мелкий текст не «рябил». */
+    "@-webkit-keyframes seltika-marquee{from{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}to{-webkit-transform:translate3d(calc((-100% - 2.5rem) / 3),0,0);transform:translate3d(calc((-100% - 2.5rem) / 3),0,0)}}" +
+    "@keyframes seltika-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc((-100% - 2.5rem) / 3),0,0)}}" +
+    ".marquee{will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden}" +
     "@-webkit-keyframes seltika-pulse{0%,100%{opacity:.45;-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(1.25);transform:scale(1.25)}}" +
     "@keyframes seltika-pulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}" +
     (reduce ?
