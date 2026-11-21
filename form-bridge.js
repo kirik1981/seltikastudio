@@ -102,6 +102,7 @@
 
   window.__seltikaSiteLead = function (data) {
     data = data || {};
+    /* Server (Parse form) rejects bodies > 16384 UTF-8 bytes. */
     return fetch(SITE_HOOK, {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -114,7 +115,6 @@
         site: String(data.site || "").trim().slice(0, 250),
         contact: String(data.contact || "").trim().slice(0, 120),
         task: String(data.task || "").trim().slice(0, 1500),
-        niche: String(data.task || "").trim().slice(0, 1500),
         package: ("plan" in data) ? String(data.plan || "").slice(0, 32) : planFromHash(),
         website: String(data.website || data.hp || "").trim().slice(0, 120),
         smart_token: String(data["smart-token"] || data.smart_token || "").trim().slice(0, 2048),
