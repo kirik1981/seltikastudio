@@ -1,7 +1,8 @@
 /* GitHub Pages has no TanStack /_serverFn. The free check shows example questions only (no scores).
    Leads POST to n8n. React calls window.__seltikaSiteScan / __seltikaSiteLead. */
 (function () {
-  var SITE_HOOK = "https://n8n.gobots.ru/webhook/seltikastudio-site";
+  /* TODO(before push): replace __REPLACE_WITH_RANDOM_PATH__ with the random path from n8n Webhook v2 */
+  var SITE_HOOK = "https://n8n.gobots.ru/webhook/__REPLACE_WITH_RANDOM_PATH__";
   var SCAN = "a42b99520690860484df897cc18989b725481172a67d99bb3aa94ce95a1773b3";
   var LEAD = "5ddea7d37b2ed55e2ade42f3fd84861d5eca3e7dfd4347c7470cc5bf64b4b3d8";
 
@@ -107,18 +108,21 @@
       body: JSON.stringify({
         source: "seltikastudio.ru",
         action: "lead.upsert",
-        name: data.name || "",
-        brand: data.company || data.brand || data.name || "",
-        company: data.company || "",
-        site: data.site || "",
-        contact: data.contact || "",
-        task: data.task || "",
-        niche: data.task || "",
-        package: ("plan" in data) ? String(data.plan || "") : planFromHash(),
+        name: String(data.name || "").trim().slice(0, 120),
+        brand: String(data.company || data.brand || data.name || "").trim().slice(0, 150),
+        company: String(data.company || "").trim().slice(0, 150),
+        site: String(data.site || "").trim().slice(0, 250),
+        contact: String(data.contact || "").trim().slice(0, 120),
+        task: String(data.task || "").trim().slice(0, 1500),
+        niche: String(data.task || "").trim().slice(0, 1500),
+        package: ("plan" in data) ? String(data.plan || "").slice(0, 32) : planFromHash(),
+        website: String(data.website || data.hp || "").trim().slice(0, 120),
+        smart_token: String(data["smart-token"] || data.smart_token || "").trim().slice(0, 2048),
       }),
     })
       .then(function (r) {
         if (r.ok) return { ok: true };
+        if (r.status === 429) return { ok: false, error: "Слишком много отправок. Подождите несколько минут или напишите в Telegram @seltikastudiobot." };
         return { ok: false, error: "Не удалось отправить. Напишите в Telegram @seltikastudiobot, в WhatsApp +7 903 343-40-07 или позвоните." };
       })
       .catch(function () {
