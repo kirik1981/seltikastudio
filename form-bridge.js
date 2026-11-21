@@ -1,8 +1,8 @@
 /* GitHub Pages has no TanStack /_serverFn. The free check shows example questions only (no scores).
    Leads POST to n8n. React calls window.__seltikaSiteScan / __seltikaSiteLead. */
 (function () {
-  /* TODO(before push): replace __REPLACE_WITH_RANDOM_PATH__ with the random path from n8n Webhook v2 */
-  var SITE_HOOK = "https://n8n.gobots.ru/webhook/__REPLACE_WITH_RANDOM_PATH__";
+  /* Webhook v2 path set at deploy of studio-form-webhook-2026-11-21.6 */
+  var SITE_HOOK = "https://n8n.gobots.ru/webhook/sf-7942f2f18f2d980a8e02a712";
   var SCAN = "a42b99520690860484df897cc18989b725481172a67d99bb3aa94ce95a1773b3";
   var LEAD = "5ddea7d37b2ed55e2ade42f3fd84861d5eca3e7dfd4347c7470cc5bf64b4b3d8";
 
