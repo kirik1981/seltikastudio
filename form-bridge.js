@@ -102,7 +102,7 @@
 
   window.__seltikaSiteLead = function (data) {
     data = data || {};
-    /* Server (Parse form) rejects bodies > 16384 UTF-8 bytes. */
+    /* Server (Parse form): body ≤16384 UTF-8 bytes; no per-IP limit; global soft ceiling 20 leads/hour (note «ФЛУД?»), hard cap 100/hour (429). */
     return fetch(SITE_HOOK, {
       method: "POST",
       headers: { "content-type": "application/json" },
