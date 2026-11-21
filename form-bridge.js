@@ -102,7 +102,7 @@
 
   window.__seltikaSiteLead = function (data) {
     data = data || {};
-    /* Server (Parse form): body ≤16384 UTF-8 bytes; no per-IP limit; global soft ceiling 20 leads/hour (note «ФЛУД?»), hard cap 100/hour (429). */
+    /* Server (Parse form): body ≤16384 UTF-8 bytes; no per-IP limit; soft 20/hour («ФЛУД?»); hard 100/hour → 429 + staticData rejected_count; once/hour one lead.upsert signal to Kirill. */
     return fetch(SITE_HOOK, {
       method: "POST",
       headers: { "content-type": "application/json" },
